@@ -30,7 +30,7 @@ $mysql_exec $db -e "create table t_user_detail
 (
     uid bigint not null comment 'uid',
     nick_name varchar(64) not null default '' comment '昵称',
-    head_pic_url varchar(256) not null default '' comment '头像地址',
+    head_picture_url varchar(256) not null default '' comment '头像地址',
     gender tinyint not null default '0' comment '性别: 0-未知; 1-女; 2-男',
     real_name varchar(40) not null default '' comment '真实姓名',
     birthday datetime not null default '0000-00-00 00:00:00' comment '生日',
@@ -40,9 +40,10 @@ $mysql_exec $db -e "create table t_user_detail
     security_level tinyint not null default '0' comment '账户安全等级: 0-未知',
     city_code varchar(30) not null default '' comment '城市code',
     pro_code varchar(30) not null default '' comment '省份code',
-    reg_channel varchar(64) default null comment '注册渠道号',
-    reg_platform tinyint not null default '0' comment '平台: 0-Web; 1-IOS; 2-Andriod',
-    reg_date datetime not null default '0000-00-00 00:00:00' comment '注册时间',
+    sign_up_ip varchar(64) not null default '' comment '注册ip',
+    sign_up_channel varchar(64) default null comment '注册渠道号',
+    sign_up_app_type tinyint not null default '0' comment 'app类型: 0-未知; 1-Web; 2-IOS; 3-Andriod',
+    sign_up_date datetime not null default '0000-00-00 00:00:00' comment '注册时间',
     update_time datetime not null default '0000-00-00 00:00:00' comment '更新时间',
     create_time datetime not null default '0000-00-00 00:00:00' comment '创建时间',
     PRIMARY KEY (uid)
@@ -60,13 +61,13 @@ $mysql_exec $db -e "create table t_user_attr
 ) engine=InnoDB default charset=utf8 comment='用户属性';"
 
 #用户登录历史
-$mysql_exec $db -e "create table t_user_login_log
+$mysql_exec $db -e "create table t_user_sign_in_log
 (
     uid bigint not null comment 'uid',
-    login_ip varchar(64) not null default '' comment '登录ip',
-    login_status tinyint not null comment '登录状态: 0-失败; 1-成功'
-    login_platform tinyint default '-1' comment '平台: 0-Web; 1-IOS; 2-Andriod',
-    login_time  datetime not null default '0000-00-00 00:00:00' comment '登录时间',
+    sign_in_ip varchar(64) not null default '' comment '登录ip',
+    sign_in_status tinyint not null comment '登录状态: 0-失败; 1-成功'
+    sign_in_app_type tinyint default '-1' comment 'app类型: 0-未知; 1-Web; 2-IOS; 3-Andriod',
+    sign_in_time  datetime not null default '0000-00-00 00:00:00' comment '登录时间',
     create_time datetime not null default '0000-00-00 00:00:00' comment '创建时间',
     primary key(uid),
 )engine=InnoDB default charset=utf8;"
