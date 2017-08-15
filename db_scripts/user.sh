@@ -13,7 +13,7 @@ $mysql_exec $db -e "create table t_user
     email varchar(200) not null default '' comment '邮箱',
     id_card_no varchar(100) not null default '' comment '证件号码',
     id_card_type tinyint default '0' comment '证件类型: 0-未知类型; 1-中国大陆居民身份证; 2-台湾居民来往大陆通行证; 3-港澳居民来往内地通行证',
-    id_card_status tinyint default '0' comment '实名状态: 0-未实名; 1-已实名',
+    id_card_status tinyint default '-1' comment '实名状态: -1-未知; 0-未实名; 1-已实名',
     password varchar(128) not null comment '密码',
     user_status tinyint not null default '0' comment '状态: 0-正常; 1-锁定; 2-删除; 3-黑名单',
     update_time datetime not null default '0000-00-00 00:00:00' comment '更新时间',
@@ -65,11 +65,11 @@ $mysql_exec $db -e "create table t_user_sign_in_log
 (
     uid bigint not null comment 'uid',
     sign_in_ip varchar(64) not null default '' comment '登录ip',
-    sign_in_status tinyint not null comment '登录状态: 0-失败; 1-成功'
-    sign_in_app_type tinyint default '-1' comment 'app类型: 0-未知; 1-Web; 2-IOS; 3-Andriod',
+    sign_in_status tinyint not null comment '登录状态: 0-失败; 1-成功',
+    sign_in_app_type tinyint default '0' comment 'app类型: 0-未知; 1-Web; 2-IOS; 3-Andriod',
     sign_in_time  datetime not null default '0000-00-00 00:00:00' comment '登录时间',
     create_time datetime not null default '0000-00-00 00:00:00' comment '创建时间',
-    primary key(uid),
+    primary key(uid)
 )engine=InnoDB default charset=utf8;"
 
 #uid与idno关系映射表
@@ -90,7 +90,7 @@ $mysql_exec $db -e "create table t_uid_with_mobile
     mobile varchar(20) not null comment '手机号',
     used_status tinyint not null default '0' comment '使用状态: 0-正常; 1-禁用',
     primary key (uid),
-    unique key index_mobile (mobile),
+    unique key index_mobile (mobile)
 )engine=InnoDB default charset=utf8 comment='uid与mobile关联表';"
 
 #uid与user_name关系映射表

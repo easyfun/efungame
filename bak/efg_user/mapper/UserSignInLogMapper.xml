@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.efun.game.user.dao.UserSignInLogDao">
+  <resultMap id="BaseResultMap" type="com.efun.game.user.entity.UserSignInLog">
+    <id column="uid" jdbcType="BIGINT" property="uid" />
+    <result column="sign_in_ip" jdbcType="VARCHAR" property="signInIp" />
+    <result column="sign_in_status" jdbcType="TINYINT" property="signInStatus" />
+    <result column="sign_in_app_type" jdbcType="TINYINT" property="signInAppType" />
+    <result column="sign_in_time" jdbcType="TIMESTAMP" property="signInTime" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    uid, sign_in_ip, sign_in_status, sign_in_app_type, sign_in_time, create_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_user_sign_in_log
+    where uid = #{uid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_user_sign_in_log
+    where uid = #{uid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.efun.game.user.entity.UserSignInLog">
+    insert into t_user_sign_in_log (uid, sign_in_ip, sign_in_status, 
+      sign_in_app_type, sign_in_time, create_time
+      )
+    values (#{uid,jdbcType=BIGINT}, #{signInIp,jdbcType=VARCHAR}, #{signInStatus,jdbcType=TINYINT}, 
+      #{signInAppType,jdbcType=TINYINT}, #{signInTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.efun.game.user.entity.UserSignInLog">
+    insert into t_user_sign_in_log
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="uid != null">
+        uid,
+      </if>
+      <if test="signInIp != null">
+        sign_in_ip,
+      </if>
+      <if test="signInStatus != null">
+        sign_in_status,
+      </if>
+      <if test="signInAppType != null">
+        sign_in_app_type,
+      </if>
+      <if test="signInTime != null">
+        sign_in_time,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="uid != null">
+        #{uid,jdbcType=BIGINT},
+      </if>
+      <if test="signInIp != null">
+        #{signInIp,jdbcType=VARCHAR},
+      </if>
+      <if test="signInStatus != null">
+        #{signInStatus,jdbcType=TINYINT},
+      </if>
+      <if test="signInAppType != null">
+        #{signInAppType,jdbcType=TINYINT},
+      </if>
+      <if test="signInTime != null">
+        #{signInTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.efun.game.user.entity.UserSignInLog">
+    update t_user_sign_in_log
+    <set>
+      <if test="signInIp != null">
+        sign_in_ip = #{signInIp,jdbcType=VARCHAR},
+      </if>
+      <if test="signInStatus != null">
+        sign_in_status = #{signInStatus,jdbcType=TINYINT},
+      </if>
+      <if test="signInAppType != null">
+        sign_in_app_type = #{signInAppType,jdbcType=TINYINT},
+      </if>
+      <if test="signInTime != null">
+        sign_in_time = #{signInTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where uid = #{uid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.efun.game.user.entity.UserSignInLog">
+    update t_user_sign_in_log
+    set sign_in_ip = #{signInIp,jdbcType=VARCHAR},
+      sign_in_status = #{signInStatus,jdbcType=TINYINT},
+      sign_in_app_type = #{signInAppType,jdbcType=TINYINT},
+      sign_in_time = #{signInTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where uid = #{uid,jdbcType=BIGINT}
+  </update>
+  <resultMap id="BaseResultMap" type="com.efun.game.user.entity.UserSignInLog">
+    <id column="uid" jdbcType="BIGINT" property="uid" />
+    <result column="sign_in_ip" jdbcType="VARCHAR" property="signInIp" />
+    <result column="sign_in_status" jdbcType="TINYINT" property="signInStatus" />
+    <result column="sign_in_app_type" jdbcType="TINYINT" property="signInAppType" />
+    <result column="sign_in_time" jdbcType="TIMESTAMP" property="signInTime" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    uid, sign_in_ip, sign_in_status, sign_in_app_type, sign_in_time, create_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_user_sign_in_log
+    where uid = #{uid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_user_sign_in_log
+    where uid = #{uid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.efun.game.user.entity.UserSignInLog">
+    insert into t_user_sign_in_log (uid, sign_in_ip, sign_in_status, 
+      sign_in_app_type, sign_in_time, create_time
+      )
+    values (#{uid,jdbcType=BIGINT}, #{signInIp,jdbcType=VARCHAR}, #{signInStatus,jdbcType=TINYINT}, 
+      #{signInAppType,jdbcType=TINYINT}, #{signInTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.efun.game.user.entity.UserSignInLog">
+    insert into t_user_sign_in_log
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="uid != null">
+        uid,
+      </if>
+      <if test="signInIp != null">
+        sign_in_ip,
+      </if>
+      <if test="signInStatus != null">
+        sign_in_status,
+      </if>
+      <if test="signInAppType != null">
+        sign_in_app_type,
+      </if>
+      <if test="signInTime != null">
+        sign_in_time,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="uid != null">
+        #{uid,jdbcType=BIGINT},
+      </if>
+      <if test="signInIp != null">
+        #{signInIp,jdbcType=VARCHAR},
+      </if>
+      <if test="signInStatus != null">
+        #{signInStatus,jdbcType=TINYINT},
+      </if>
+      <if test="signInAppType != null">
+        #{signInAppType,jdbcType=TINYINT},
+      </if>
+      <if test="signInTime != null">
+        #{signInTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.efun.game.user.entity.UserSignInLog">
+    update t_user_sign_in_log
+    <set>
+      <if test="signInIp != null">
+        sign_in_ip = #{signInIp,jdbcType=VARCHAR},
+      </if>
+      <if test="signInStatus != null">
+        sign_in_status = #{signInStatus,jdbcType=TINYINT},
+      </if>
+      <if test="signInAppType != null">
+        sign_in_app_type = #{signInAppType,jdbcType=TINYINT},
+      </if>
+      <if test="signInTime != null">
+        sign_in_time = #{signInTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where uid = #{uid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.efun.game.user.entity.UserSignInLog">
+    update t_user_sign_in_log
+    set sign_in_ip = #{signInIp,jdbcType=VARCHAR},
+      sign_in_status = #{signInStatus,jdbcType=TINYINT},
+      sign_in_app_type = #{signInAppType,jdbcType=TINYINT},
+      sign_in_time = #{signInTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where uid = #{uid,jdbcType=BIGINT}
+  </update>
+</mapper>

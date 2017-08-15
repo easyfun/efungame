@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.efun.game.user.dao.UidWithUserNameDao">
+  <resultMap id="BaseResultMap" type="com.efun.game.user.entity.UidWithUserName">
+    <id column="uid" jdbcType="BIGINT" property="uid" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="used_status" jdbcType="TINYINT" property="usedStatus" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    uid, user_name, used_status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_uid_with_user_name
+    where uid = #{uid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_uid_with_user_name
+    where uid = #{uid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.efun.game.user.entity.UidWithUserName">
+    insert into t_uid_with_user_name (uid, user_name, used_status
+      )
+    values (#{uid,jdbcType=BIGINT}, #{userName,jdbcType=VARCHAR}, #{usedStatus,jdbcType=TINYINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.efun.game.user.entity.UidWithUserName">
+    insert into t_uid_with_user_name
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="uid != null">
+        uid,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="usedStatus != null">
+        used_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="uid != null">
+        #{uid,jdbcType=BIGINT},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="usedStatus != null">
+        #{usedStatus,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.efun.game.user.entity.UidWithUserName">
+    update t_uid_with_user_name
+    <set>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="usedStatus != null">
+        used_status = #{usedStatus,jdbcType=TINYINT},
+      </if>
+    </set>
+    where uid = #{uid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.efun.game.user.entity.UidWithUserName">
+    update t_uid_with_user_name
+    set user_name = #{userName,jdbcType=VARCHAR},
+      used_status = #{usedStatus,jdbcType=TINYINT}
+    where uid = #{uid,jdbcType=BIGINT}
+  </update>
+  <resultMap id="BaseResultMap" type="com.efun.game.user.entity.UidWithUserName">
+    <id column="uid" jdbcType="BIGINT" property="uid" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="used_status" jdbcType="TINYINT" property="usedStatus" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    uid, user_name, used_status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_uid_with_user_name
+    where uid = #{uid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_uid_with_user_name
+    where uid = #{uid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.efun.game.user.entity.UidWithUserName">
+    insert into t_uid_with_user_name (uid, user_name, used_status
+      )
+    values (#{uid,jdbcType=BIGINT}, #{userName,jdbcType=VARCHAR}, #{usedStatus,jdbcType=TINYINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.efun.game.user.entity.UidWithUserName">
+    insert into t_uid_with_user_name
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="uid != null">
+        uid,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="usedStatus != null">
+        used_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="uid != null">
+        #{uid,jdbcType=BIGINT},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="usedStatus != null">
+        #{usedStatus,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.efun.game.user.entity.UidWithUserName">
+    update t_uid_with_user_name
+    <set>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="usedStatus != null">
+        used_status = #{usedStatus,jdbcType=TINYINT},
+      </if>
+    </set>
+    where uid = #{uid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.efun.game.user.entity.UidWithUserName">
+    update t_uid_with_user_name
+    set user_name = #{userName,jdbcType=VARCHAR},
+      used_status = #{usedStatus,jdbcType=TINYINT}
+    where uid = #{uid,jdbcType=BIGINT}
+  </update>
+</mapper>

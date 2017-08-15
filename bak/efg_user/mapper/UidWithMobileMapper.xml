@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.efun.game.user.dao.UidWithMobileDao">
+  <resultMap id="BaseResultMap" type="com.efun.game.user.entity.UidWithMobile">
+    <id column="uid" jdbcType="BIGINT" property="uid" />
+    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="used_status" jdbcType="TINYINT" property="usedStatus" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    uid, mobile, used_status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_uid_with_mobile
+    where uid = #{uid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_uid_with_mobile
+    where uid = #{uid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.efun.game.user.entity.UidWithMobile">
+    insert into t_uid_with_mobile (uid, mobile, used_status
+      )
+    values (#{uid,jdbcType=BIGINT}, #{mobile,jdbcType=VARCHAR}, #{usedStatus,jdbcType=TINYINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.efun.game.user.entity.UidWithMobile">
+    insert into t_uid_with_mobile
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="uid != null">
+        uid,
+      </if>
+      <if test="mobile != null">
+        mobile,
+      </if>
+      <if test="usedStatus != null">
+        used_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="uid != null">
+        #{uid,jdbcType=BIGINT},
+      </if>
+      <if test="mobile != null">
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="usedStatus != null">
+        #{usedStatus,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.efun.game.user.entity.UidWithMobile">
+    update t_uid_with_mobile
+    <set>
+      <if test="mobile != null">
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="usedStatus != null">
+        used_status = #{usedStatus,jdbcType=TINYINT},
+      </if>
+    </set>
+    where uid = #{uid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.efun.game.user.entity.UidWithMobile">
+    update t_uid_with_mobile
+    set mobile = #{mobile,jdbcType=VARCHAR},
+      used_status = #{usedStatus,jdbcType=TINYINT}
+    where uid = #{uid,jdbcType=BIGINT}
+  </update>
+  <resultMap id="BaseResultMap" type="com.efun.game.user.entity.UidWithMobile">
+    <id column="uid" jdbcType="BIGINT" property="uid" />
+    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="used_status" jdbcType="TINYINT" property="usedStatus" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    uid, mobile, used_status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_uid_with_mobile
+    where uid = #{uid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_uid_with_mobile
+    where uid = #{uid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.efun.game.user.entity.UidWithMobile">
+    insert into t_uid_with_mobile (uid, mobile, used_status
+      )
+    values (#{uid,jdbcType=BIGINT}, #{mobile,jdbcType=VARCHAR}, #{usedStatus,jdbcType=TINYINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.efun.game.user.entity.UidWithMobile">
+    insert into t_uid_with_mobile
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="uid != null">
+        uid,
+      </if>
+      <if test="mobile != null">
+        mobile,
+      </if>
+      <if test="usedStatus != null">
+        used_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="uid != null">
+        #{uid,jdbcType=BIGINT},
+      </if>
+      <if test="mobile != null">
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="usedStatus != null">
+        #{usedStatus,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.efun.game.user.entity.UidWithMobile">
+    update t_uid_with_mobile
+    <set>
+      <if test="mobile != null">
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="usedStatus != null">
+        used_status = #{usedStatus,jdbcType=TINYINT},
+      </if>
+    </set>
+    where uid = #{uid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.efun.game.user.entity.UidWithMobile">
+    update t_uid_with_mobile
+    set mobile = #{mobile,jdbcType=VARCHAR},
+      used_status = #{usedStatus,jdbcType=TINYINT}
+    where uid = #{uid,jdbcType=BIGINT}
+  </update>
+</mapper>
