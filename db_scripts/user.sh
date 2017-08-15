@@ -13,7 +13,7 @@ $mysql_exec $db -e "create table t_user
     email varchar(200) not null default '' comment '邮箱',
     id_card_no varchar(100) not null default '' comment '证件号码',
     id_card_type tinyint default '0' comment '证件类型: 0-未知类型; 1-中国大陆居民身份证; 2-台湾居民来往大陆通行证; 3-港澳居民来往内地通行证',
-    id_card_status tinyint default '-1' comment '实名状态: -1-未知; 0-未实名; 1-已实名',
+    id_card_status tinyint default '0' comment '实名状态: 0-未知; 1-未实名; 2-已实名',
     password varchar(128) not null comment '密码',
     user_status tinyint not null default '0' comment '状态: 0-正常; 1-锁定; 2-删除; 3-黑名单',
     update_time datetime not null default '0000-00-00 00:00:00' comment '更新时间',
