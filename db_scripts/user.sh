@@ -13,9 +13,9 @@ $mysql_exec $db -e "create table t_user
     email varchar(200) default null comment '邮箱',
     id_card_no varchar(100) default null comment '证件号码',
     id_card_type tinyint not null default '0' comment '证件类型: 0-未知类型; 1-中国大陆居民身份证; 2-台湾居民来往大陆通行证; 3-港澳居民来往内地通行证',
-    id_card_status tinyint not null default '0' comment '实名状态: 0-未知; 1-未实名; 2-已实名',
+    id_card_status tinyint not null default '1' comment '实名状态: 1-未实名; 2-已实名',
     password varchar(128) not null comment '密码',
-    user_status tinyint not null default '0' comment '状态: 0-正常; 1-锁定; 2-删除; 3-黑名单',
+    user_status tinyint not null default '1' comment '状态: 1-正常; 2-锁定; 3-删除; 4-黑名单',
     update_time datetime not null default '0000-00-00 00:00:00' comment '更新时间',
     create_time datetime not null default '0000-00-00 00:00:00' comment '创建时间',
     primary key (uid),
@@ -35,7 +35,7 @@ $mysql_exec $db -e "create table t_user_detail
     real_name varchar(40) not null default '' comment '真实姓名',
     birthday datetime not null default '0000-00-00 00:00:00' comment '生日',
     age int not null default '-1' comment '年龄: -1未知',
-    marriage_status tinyint default '0' comment '婚姻状态: 0-未婚; 1-已婚; 2-保密',
+    marriage_status tinyint default '0' comment '婚姻状态: 0-未知; 1-未婚; 2-已婚; 3 -保密',
     education varchar(10) not null default '0' comment '学历: 0-未知',
     security_level tinyint not null default '0' comment '账户安全等级: 0-未知',
     city_code varchar(30) not null default '' comment '城市code',
@@ -81,6 +81,8 @@ $mysql_exec $db -e "create table t_uid_with_id_card_no
     id_card_no varchar(100) not null comment '身份证号',
     id_card_type tinyint not null default '0' comment '证件类型: 0-未知类型; 1-中国大陆居民身份证; 2-台湾居民来往大陆通行证; 3-港澳居民来往内地通行证',
     used_status tinyint not null default '0' comment '使用状态: 0-正常; 1-禁用',
+    update_time datetime not null default '0000-00-00 00:00:00' comment '更新时间',
+    create_time datetime not null default '0000-00-00 00:00:00' comment '创建时间',
     primary key (uid),
     unique key index_id_card_no(id_card_no)
 ) engine=InnoDB default charset=utf8 comment='uid与id_card_no关联表';"
@@ -91,6 +93,8 @@ $mysql_exec $db -e "create table t_uid_with_mobile
     uid bigint not null comment 'uid',
     mobile varchar(20) not null comment '手机号',
     used_status tinyint not null default '0' comment '使用状态: 0-正常; 1-禁用',
+    update_time datetime not null default '0000-00-00 00:00:00' comment '更新时间',
+    create_time datetime not null default '0000-00-00 00:00:00' comment '创建时间',
     primary key (uid),
     unique key index_mobile (mobile)
 )engine=InnoDB default charset=utf8 comment='uid与mobile关联表';"
@@ -101,6 +105,8 @@ $mysql_exec $db -e "create table t_uid_with_user_name
     uid bigint not null comment 'uid',
     user_name varchar(64) not null comment '用户名',
     used_status tinyint not null default '0' comment '使用状态: 0-正常; 1-禁用',
+    update_time datetime not null default '0000-00-00 00:00:00' comment '更新时间',
+    create_time datetime not null default '0000-00-00 00:00:00' comment '创建时间',
     primary key (uid),
     unique key index_user_name (user_name)
 )engine=InnoDB default charset=utf8 comment='uid与user_name关联表';"
@@ -111,6 +117,8 @@ $mysql_exec $db -e "create table t_uid_with_email
     uid bigint not null comment 'uid',
     email varchar(64) not null comment '邮箱',
     used_status tinyint not null default '0' comment '使用状态: 0-正常; 1-禁用',
+    update_time datetime not null default '0000-00-00 00:00:00' comment '更新时间',
+    create_time datetime not null default '0000-00-00 00:00:00' comment '创建时间',
     primary key (uid),
     unique key index_email (email)
 )engine=InnoDB default charset=utf8 comment='uid与email关联表';"
