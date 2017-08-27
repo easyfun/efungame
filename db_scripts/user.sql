@@ -12,8 +12,8 @@ create table t_user
     id_card_status tinyint not null default '0' comment '实名状态: 0-未知; 1-未实名; 2-已实名',
     password varchar(128) not null comment '密码',
     user_status tinyint not null default '0' comment '状态: 0-正常; 1-锁定; 2-删除; 3-黑名单',
-    update_time datetime not null default '0000-00-00 00:00:00' comment '更新时间',
-    create_time datetime not null default '0000-00-00 00:00:00' comment '创建时间',
+    update_time datetime not null default '9999-12-31 23:59:59.999' comment '更新时间',
+    create_time datetime not null default '9999-12-31 23:59:59.999' comment '创建时间',
     primary key (uid),
     unique key index_mobile (mobile),
     unique key index_user_name (user_name),
@@ -29,7 +29,7 @@ create table t_user_detail
     head_picture_url varchar(256) not null default '' comment '头像地址',
     gender tinyint not null default '0' comment '性别: 0-未知; 1-女; 2-男',
     real_name varchar(40) not null default '' comment '真实姓名',
-    birthday datetime not null default '0000-00-00 00:00:00' comment '生日',
+    birthday datetime not null default '9999-12-31 23:59:59.999' comment '生日',
     age int not null default '-1' comment '年龄: -1未知',
     marriage_status tinyint default '0' comment '婚姻状态: 0-未婚; 1-已婚; 2-保密',
     education varchar(10) not null default '0' comment '学历: 0-未知',
@@ -39,9 +39,9 @@ create table t_user_detail
     sign_up_ip varchar(64) not null default '' comment '注册ip',
     sign_up_channel varchar(64) default null comment '注册渠道号',
     sign_up_app_type tinyint not null default '0' comment 'app类型: 0-未知; 1-Web; 2-IOS; 3-Andriod',
-    sign_up_date datetime not null default '0000-00-00 00:00:00' comment '注册时间',
-    update_time datetime not null default '0000-00-00 00:00:00' comment '更新时间',
-    create_time datetime not null default '0000-00-00 00:00:00' comment '创建时间',
+    sign_up_date datetime not null default '9999-12-31 23:59:59.999' comment '注册时间',
+    update_time datetime not null default '9999-12-31 23:59:59.999' comment '更新时间',
+    create_time datetime not null default '9999-12-31 23:59:59.999' comment '创建时间',
     PRIMARY KEY (uid)
 ) engine=InnoDB default charset=utf8 comment='用户详细信息';
 
@@ -51,8 +51,8 @@ create table t_user_attr
     uid bigint not null comment 'uid',
     field_name varchar(64) not null comment '属性',
     field_value varchar(250) not null comment '值',
-    update_time datetime not null default '0000-00-00 00:00:00' comment '更新时间',
-    create_time datetime not null default '0000-00-00 00:00:00' comment '创建时间',
+    update_time datetime not null default '9999-12-31 23:59:59.999' comment '更新时间',
+    create_time datetime not null default '9999-12-31 23:59:59.999' comment '创建时间',
     primary key (uid)
 ) engine=InnoDB default charset=utf8 comment='用户属性';
 
@@ -60,14 +60,15 @@ create table t_user_attr
 create table t_user_sign_in_log
 (
     uid bigint not null comment 'uid',
+    session_id bigint not null comment '会话id',
     sign_in_ip varchar(64) not null default '' comment '登录ip',
     sign_in_status tinyint not null comment '登录状态: 0-失败; 1-成功',
     sign_in_app_type tinyint default '0' comment 'app类型: 0-未知; 1-Web; 2-IOS; 3-Andriod',
-    sign_in_time  datetime not null default '0000-00-00 00:00:00' comment '登录时间',
-    create_time datetime not null default '0000-00-00 00:00:00' comment '创建时间',
-    primary key(uid)
+    sign_in_time  datetime not null default '9999-12-31 23:59:59.999' comment '登录时间',
+    create_time datetime not null default '9999-12-31 23:59:59.999' comment '创建时间',
+    primary key(uid),
+    unique key index_session_id (session_id)
 )engine=InnoDB default charset=utf8;
-
 #uid与idno关系映射表
 create table t_uid_with_id_card_no
 (

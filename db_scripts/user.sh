@@ -64,12 +64,14 @@ $mysql_exec $db -e "create table t_user_attr
 $mysql_exec $db -e "create table t_user_sign_in_log
 (
     uid bigint not null comment 'uid',
+    session_id bigint not null comment '会话id',
     sign_in_ip varchar(64) not null default '' comment '登录ip',
     sign_in_status tinyint not null comment '登录状态: 0-失败; 1-成功',
     sign_in_app_type tinyint default '0' comment 'app类型: 0-未知; 1-Web; 2-IOS; 3-Andriod',
     sign_in_time  datetime not null default '0000-00-00 00:00:00' comment '登录时间',
     create_time datetime not null default '0000-00-00 00:00:00' comment '创建时间',
-    primary key(uid)
+    primary key(uid),
+    unique key index_session_id (session_id)
 )engine=InnoDB default charset=utf8;"
 
 #uid与idno关系映射表
