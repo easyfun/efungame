@@ -63,6 +63,7 @@ create table t_user_sign_in_log
     session_id bigint not null comment '会话id',
     sign_in_ip varchar(64) not null default '' comment '登录ip',
     sign_in_status tinyint not null comment '登录状态: 0-失败; 1-成功',
+    sign_in_fail_code bigint not null comment '登录失败错误码: 0-成功',
     sign_in_fail_reason varchar(128) not null default '' comment '登录失败原因',
     sign_in_app_type tinyint default '0' comment 'app类型: 0-未知; 1-Web; 2-IOS; 3-Andriod',
     sign_in_time  datetime not null default '9999-12-31 23:59:59.999' comment '登录时间',
