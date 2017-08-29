@@ -59,6 +59,7 @@ create table t_user_attr
 #用户登录历史
 create table t_user_sign_in_log
 (
+    id bigint not null comment '主键',
     uid bigint not null comment 'uid',
     session_id bigint not null comment '会话id',
     sign_in_ip varchar(64) not null default '' comment '登录ip',
@@ -68,8 +69,7 @@ create table t_user_sign_in_log
     sign_in_app_type tinyint default '0' comment 'app类型: 0-未知; 1-Web; 2-IOS; 3-Andriod',
     sign_in_time  datetime not null default '9999-12-31 23:59:59.999' comment '登录时间',
     create_time datetime not null default '9999-12-31 23:59:59.999' comment '创建时间',
-    primary key(uid),
-    unique key index_session_id (session_id)
+    primary key(id)
 )engine=InnoDB default charset=utf8;
 #uid与idno关系映射表
 create table t_uid_with_id_card_no
@@ -78,6 +78,8 @@ create table t_uid_with_id_card_no
     id_card_no varchar(100) not null comment '身份证号',
     id_card_type tinyint not null default '0' comment '证件类型: 0-未知类型; 1-中国大陆居民身份证; 2-台湾居民来往大陆通行证; 3-港澳居民来往内地通行证',
     used_status tinyint not null default '0' comment '使用状态: 0-正常; 1-禁用',
+    update_time datetime not null default '9999-12-31 23:59:59.999' comment '更新时间',
+    create_time datetime not null default '9999-12-31 23:59:59.999' comment '创建时间',
     primary key (uid),
     unique key index_id_card_no(id_card_no)
 ) engine=InnoDB default charset=utf8 comment='uid与id_card_no关联表';
@@ -88,6 +90,8 @@ create table t_uid_with_mobile
     uid bigint not null comment 'uid',
     mobile varchar(20) not null comment '手机号',
     used_status tinyint not null default '0' comment '使用状态: 0-正常; 1-禁用',
+    update_time datetime not null default '9999-12-31 23:59:59.999' comment '更新时间',
+    create_time datetime not null default '9999-12-31 23:59:59.999' comment '创建时间',
     primary key (uid),
     unique key index_mobile (mobile)
 )engine=InnoDB default charset=utf8 comment='uid与mobile关联表';
@@ -98,6 +102,8 @@ create table t_uid_with_user_name
     uid bigint not null comment 'uid',
     user_name varchar(64) not null comment '用户名',
     used_status tinyint not null default '0' comment '使用状态: 0-正常; 1-禁用',
+    update_time datetime not null default '9999-12-31 23:59:59.999' comment '更新时间',
+    create_time datetime not null default '9999-12-31 23:59:59.999' comment '创建时间',
     primary key (uid),
     unique key index_user_name (user_name)
 )engine=InnoDB default charset=utf8 comment='uid与user_name关联表';
@@ -108,6 +114,8 @@ create table t_uid_with_email
     uid bigint not null comment 'uid',
     email varchar(64) not null comment '邮箱',
     used_status tinyint not null default '0' comment '使用状态: 0-正常; 1-禁用',
+    update_time datetime not null default '9999-12-31 23:59:59.999' comment '更新时间',
+    create_time datetime not null default '9999-12-31 23:59:59.999' comment '创建时间',
     primary key (uid),
     unique key index_email (email)
 )engine=InnoDB default charset=utf8 comment='uid与email关联表';
