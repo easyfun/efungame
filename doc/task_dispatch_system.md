@@ -1,11 +1,10 @@
-#任务调度系统
+# 任务调度系统
 
-##第一章 功能
+## 第一章 功能
 
 系统功能
 
-- 方便服务端异步接口开发
-- 先将前端请求入库，启动异步任务，立即返回
+- 方便服务端异步接口开发，先将请求入库，启动异步任务，立即返回
 - 订单系统模式，在电商，银行，交易领域广泛采用
 
 目标
@@ -14,25 +13,30 @@
 - 高可用
 - 高性能，尽量少与db交互，尽量少交互信息量，批量查询
 
-##第二章 工作原理
+## 第二章 工作原理
+- 基于生产者－消费者模式
+- 利用redis的hash,zset数据类型创建工作队列
+- 数据存储redis、mysql，sqlite
 
-基于redis、mysql
+### 系统框图
+![系统框架](./resources/task_system/task_system_architecture_diagram.png)
 
-##第三章 数据结构
+## 第三章 数据结构
 
 - task: {childTask1,childTask2,...}
 - taskHandler: {childTaskHandler1,childTaskHandler2,...}
 
-###mysql表设计
+### mysql表设计
 
     create database task;
     use task;
     create table t_task (
       id                bigint not null comment '任务id',
       handler           varchar(128) not null default '' comment '任务处理器',#逻辑可变
-      param             varchar(128) not null default '' comment '请求参数',
-      status            varchar(16) not null default '' comment '处理状态',
-      ###version           varchar(16) not null default '0.0.0' comment '处理器版本号',
+      param             varchar(128) not null comment '请求参数',
+      status            varchar(16) not null comment '处理状态',
+      <!-- cancel -->
+      version           varchar(16) not null default '0.0.0' comment '处理器版本号',
       ###child_task        varchar(512) not null default '' comment '子任务',#列表可变
       retry_strategy  tinyint not null default '1' comment '重试策略',
       retry_interval  int not null default '60' comment '重试时间间隔:豪秒',
@@ -58,9 +62,9 @@
       index index_first_time (first_time)
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8 comment '子任务信息表';
 
-###redis数据结构
+### redis数据结构
 
-####任务信息
+#### 任务信息
 
 采用方案一
 
@@ -82,7 +86,7 @@
         $id {"handler":"","param":"","status":"","retryStrategy":"","retryInterval":"","nextTime":"","lastTime":"","firstTime":""}
 
 
-####子任务信息
+#### 子任务信息
 采用方案二，检查子任务状态
 
 方案一
@@ -106,7 +110,7 @@
         $child_handler {"handler":"","status":"","lastTime":"","firstTime":""}
 
 
-###处理队列
+### 处理队列
 
 - 日集合,
 - 执行队列,zset,running:{(id1 time),(id2 time),...}
@@ -116,20 +120,20 @@
 - 失败集合,zset,fail:{(id1 time),(id2 time),...}
 - 挂起取消集合,zset,failList:{(id1 time),(id2 time),...}
 
-###任务并发策略:
+### 任务并发策略:
 
 - 同一个任务,只能由一个线程执行,不可以同时被多个线程执行
 - id唯一,已经存在的,不可以再插入
 - params唯一,已经存在的,不可以再插入
 
-###任务重启策略:
+### 任务重启策略:
 
 - 成功的不可以重启
 - (#失败的不可以重启)
 - 处理中的不可以重启
 - 丢失的可以重启
 
-###任务重试策略:
+### 任务重试策略:
 
 - 等时重试n次;
 - 指数间隔重试n次;
@@ -137,7 +141,7 @@
 - 无限重试;
 - 首日重试n次，次日重试n次;
 
-###任务状态:
+### 任务状态:
 
 - success
 - fail
@@ -146,17 +150,17 @@
 - pausequit
 
 
-##第四章 任务生产
+## 第四章 任务生产
 
-##第五章 任务消费
+## 第五章 任务消费
 
-##第六章 任务清理
+## 第六章 任务清理
 
 - T日清理T-3日之前的任务
 - 状态为成功，失败，挂起取消的任务，是最终状态，从redis删除: t_task, t_child_task
 - 在任务管理系统实现
 
-##第七章 任务管理系统
+## 第七章 任务管理系统
 
 - 查看历史任务信息
 - 查看正在执行任务信息
