@@ -19,7 +19,7 @@
 - 数据存储redis、mysql，sqlite
 
 ### 系统框图
-![系统框架](./resources/task_system/task_system_architecture_diagram.png)
+![系统框架](./resources/task_dispatch_system/task_dispatch_system_architecture_diagram.png)
 
 ## 第三章 数据结构
 
@@ -33,40 +33,54 @@
     create table t_task (
       id                bigint not null comment '任务id',
       handler           varchar(128) not null default '' comment '任务处理器',#逻辑可变
-      param             varchar(128) not null comment '请求参数',
+      param             varchar(128) not null default '' comment '请求参数',
       status            varchar(16) not null comment '处理状态',
-      <!-- cancel -->
-      version           varchar(16) not null default '0.0.0' comment '处理器版本号',
+      #version           varchar(16) not null default '0.0.0' comment '处理器版本号',
       ###child_task        varchar(512) not null default '' comment '子任务',#列表可变
       retry_strategy  tinyint not null default '1' comment '重试策略',
-      retry_interval  int not null default '60' comment '重试时间间隔:豪秒',
-      max_retry_time  int not null default '0' comment '最大重试次数',
+      retry_interval  int not null default '300' comment '重试时间间隔:豪秒',
+      max_retry_time  int not null default '3' comment '最大重试次数',
       next_time         datetime not null default '0000-00-00 00:00:00' comment '下次执行时间',
       last_time         datetime not null default '0000-00-00 00:00:00' comment '最新执行时间',
       first_time        datetime not null default '0000-00-00 00:00:00' comment '首次执行时间',
+      create_time        datetime not null default '0000-00-00 00:00:00' comment '创建时间',
+      update_time        datetime not null default '0000-00-00 00:00:00' comment '更新时间',
       primary key (id),
-      index index_next_time (next_time),
-      index index_last_time (last_time),
-      index index_first_time (first_time)
+      index idx_first_time (first_time)
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8 comment '任务信息表';
 
     create table t_child_task (
       id                bigint not null comment '任务id',
-      child_handler     varchar(128) not null default '' comment '子任务处理器',#逻辑可变
       handler           varchar(128) not null default '' comment '任务处理器',#逻辑可变
+      child_handler     varchar(128) not null default '' comment '子任务处理器',#逻辑可变
       status            varchar(16) not null default '' comment '处理状态',
       last_time         datetime not null default '0000-00-00 00:00:00' comment '最新执行时间',
       first_time        datetime not null default '0000-00-00 00:00:00' comment '首次执行时间',
+      create_time        datetime not null default '0000-00-00 00:00:00' comment '创建时间',
+      update_time        datetime not null default '0000-00-00 00:00:00' comment '更新时间',
       primary key (id),
-      index index_last_time (last_time),
-      index index_first_time (first_time)
+      index idx_first_time (first_time)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8 comment '子任务信息表';
+
+    create table t_child_change (
+      id                    bigint not null comment '任务id',
+      handler               varchar(128) not null default '' comment '任务处理器',#逻辑可变
+      change_type           tinyint unsigined not null default '0' comment '变更类型',
+      status                varchar(16) not null default '' comment '处理状态',
+      error_code            varchar(24) not null default '' comment '错误码',
+      error_desc            varchar(200) default null comment '错误描述',
+      apply_time            datetime not null default '0000-00-00 00:00:00' comment '申请时间',
+      finish_time           datetime not null default '0000-00-00 00:00:00' comment '完成时间',
+      create_time           datetime not null default '0000-00-00 00:00:00' comment '创建时间',
+      update_time           datetime not null default '0000-00-00 00:00:00' comment '更新时间',
+      primary key (id),
+      index idx_apply_time (apply_time)
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8 comment '子任务信息表';
 
 ### redis数据结构
 
 #### 任务信息
-
-采用方案一
+hash类型，zset类型，采用方案一
 
 方案一
 
@@ -87,7 +101,7 @@
 
 
 #### 子任务信息
-采用方案二，检查子任务状态
+hash类型，采用方案二，检查子任务状态
 
 方案一
     t_child_task:$id:$child_handler
@@ -109,6 +123,13 @@
     t_child_task:$id
         $child_handler {"handler":"","status":"","lastTime":"","firstTime":""}
 
+#### 任务变更
+hash类型
+    t_task_change:$id
+        $change_type:changeType 1
+        $change_type:status 0
+        $change_type:errorCode 0
+        $change_type:errorDesc ''
 
 ### 处理队列
 
