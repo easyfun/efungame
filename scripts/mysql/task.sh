@@ -7,26 +7,31 @@ $mysql_exec -e "create database task;"
 
 # use task;
 $mysql_exec $db -e "create table t_task (
-  task_id                varchar(64) not null comment '任务id',
+  task_id                bigint unsigned not null comment '任务id',
+  task_key               varchar(64) not null comment '任务key',
   handler           varchar(128) not null default '' comment '任务处理器',#逻辑可变
   param             varchar(128) not null default '' comment '请求参数',
   status            varchar(16) not null default '' comment '处理状态',
   #version           varchar(16) not null default '0.0.0' comment '处理器版本号',
   ###child_task        varchar(512) not null default '' comment '子任务',#列表可变
-  retry_strategy  tinyint not null default '1' comment '重试策略',
-  retry_interval  int not null default '300' comment '重试时间间隔:豪秒',
-  max_retry_time  int not null default '3' comment '最大重试次数',
+  retry_strategy  tinyint unsigned not null default '1' comment '重试策略',
+  retry_interval  int unsigned not null default '300' comment '重试时间间隔:豪秒',
+  max_retry_time  int unsigned not null default '3' comment '最大重试次数',
   next_time         datetime not null default '0000-00-00 00:00:00' comment '下次执行时间',
   last_time         datetime not null default '0000-00-00 00:00:00' comment '最新执行时间',
   first_time        datetime not null default '0000-00-00 00:00:00' comment '首次执行时间',
   create_time        datetime not null default '0000-00-00 00:00:00' comment '创建时间',
   update_time        datetime not null default '0000-00-00 00:00:00' comment '更新时间',
   primary key (task_id),
+  index idx_task_key_handler(task_key,handler),
+  index idx_task_key (task_key),
   index idx_first_time (first_time)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 comment '任务信息表';"
 
 $mysql_exec $db -e "create table t_child_task (
-  task_id                varchar(64) not null comment '任务id',
+  id                bigint unsigned not null auto_increment comment 'id',
+  task_id           bigint unsigned not null comment '任务id',
+  task_key          varchar(64) not null comment '任务key',
   handler           varchar(128) not null default '' comment '任务处理器',#逻辑可变
   child_handler     varchar(128) not null default '' comment '子任务处理器',#逻辑可变
   status            varchar(16) not null default '' comment '处理状态',
@@ -34,12 +39,17 @@ $mysql_exec $db -e "create table t_child_task (
   first_time        datetime not null default '0000-00-00 00:00:00' comment '首次执行时间',
   create_time        datetime not null default '0000-00-00 00:00:00' comment '创建时间',
   update_time        datetime not null default '0000-00-00 00:00:00' comment '更新时间',
-  primary key (task_id),
+  primary key (id),
+  index idx_task_id (task_id),
+  index idx_task_key_handler (task_key,handler),
+  index idx_task_key (task_key),
   index idx_first_time (first_time)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 comment '子任务信息表';"
 
 $mysql_exec $db -e "create table t_task_change (
-  task_id                    varchar(64) not null comment '任务id',
+  id                    bigint unsigned not null auto_increment comment 'id',
+  task_id               bigint unsigned not null comment '任务id',
+  task_key              varchar(64) not null comment '任务key',
   handler               varchar(128) not null default '' comment '任务处理器',#逻辑可变
   change_type           tinyint unsigned not null default 0 comment '变更类型',
   status                varchar(16) not null default '' comment '处理状态',
@@ -49,6 +59,9 @@ $mysql_exec $db -e "create table t_task_change (
   finish_time           datetime not null default '0000-00-00 00:00:00' comment '完成时间',
   create_time           datetime not null default '0000-00-00 00:00:00' comment '创建时间',
   update_time           datetime not null default '0000-00-00 00:00:00' comment '更新时间',
-  primary key (task_id),
+  primary key (id),
+  index idx_task_id (task_id),
+  index idx_task_key_handler (task_key,handler),
+  index idx_task_key (task_key),
   index idx_apply_time (apply_time)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 comment '任务变更信息表';"

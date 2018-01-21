@@ -1,0 +1,180 @@
+{
+    // 使用 IntelliSense 了解相关属性。 
+    // 悬停以查看现有属性的描述。
+    // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Debug (Launch)-AccessServer<efg_access>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "stopOnEntry": false,
+            "mainClass": "com.efun.game.access.main.AccessServer",
+            "projectName": "efg_access",
+            "args": ""
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-AccessClient<efg_access_client>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "stopOnEntry": false,
+            "mainClass": "com.efun.game.access.main.AccessClient",
+            "projectName": "efg_access_client",
+            "args": ""
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-IdConcurrentTest<efg_common>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "stopOnEntry": false,
+            "mainClass": "com.efun.game.common.id.concurrent.IdConcurrentTest",
+            "projectName": "efg_common",
+            "args": ""
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-ErrorCodeTest<efg_performance>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "stopOnEntry": false,
+            "mainClass": "com.efun.game.performance.exception.ErrorCodeTest",
+            "projectName": "efg_performance",
+            "args": ""
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-ExceptionTest<efg_performance>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "stopOnEntry": false,
+            "mainClass": "com.efun.game.performance.exception.ExceptionTest",
+            "projectName": "efg_performance",
+            "args": ""
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-IdMain<efg_performance>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "stopOnEntry": false,
+            "mainClass": "com.efun.game.performance.id.IdMain",
+            "projectName": "efg_performance",
+            "args": ""
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-DruidMain<efg_performance>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "stopOnEntry": false,
+            "mainClass": "com.efun.game.performance.mysql.druid.DruidMain",
+            "projectName": "efg_performance",
+            "args": ""
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-JdbcMain<efg_performance>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "stopOnEntry": false,
+            "mainClass": "com.efun.game.performance.mysql.jdbc.JdbcMain",
+            "projectName": "efg_performance",
+            "args": ""
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-MybatisMain<efg_performance>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "stopOnEntry": false,
+            "mainClass": "com.efun.game.performance.mysql.mybatis.MybatisMain",
+            "projectName": "efg_performance",
+            "args": ""
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-SampleClient<efg_sample_client>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "stopOnEntry": false,
+            "mainClass": "com.efun.game.sample.client.SampleClient",
+            "projectName": "efg_sample_client",
+            "args": ""
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-SampleServer<efg_sample_server>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "stopOnEntry": false,
+            "mainClass": "com.efun.game.sample.server.SampleServer",
+            "projectName": "efg_sample_server",
+            "args": ""
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-UserServiceTest<efg_service_test>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "stopOnEntry": false,
+            "mainClass": "com.efun.game.servicetest.user.test.UserServiceTest",
+            "projectName": "efg_service_test",
+            "args": ""
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-Main<efg_user>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "stopOnEntry": false,
+            "mainClass": "com.efun.game.main.Main",
+            "projectName": "efg_user",
+            "args": ""
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-HandlerMapTest<efg_user>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "stopOnEntry": false,
+            "mainClass": "com.efun.game.user.handler.HandlerMapTest",
+            "projectName": "efg_user",
+            "args": ""
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-FinalTest<eft_test>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "stopOnEntry": false,
+            "mainClass": "com.efun.game.test.final_.FinalTest",
+            "projectName": "eft_test",
+            "args": ""
+        },
+        {
+            "type": "java",
+            "name": "Debug (Attach)",
+            "request": "attach",
+            "hostName": "localhost",
+            "port": 0
+        }
+    ]
+}

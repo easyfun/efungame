@@ -32,6 +32,7 @@ hash类型，zset类型，采用方案一
 
 	t_task:$id
         handler
+        task_object
         param
         status
         retry_strategy
@@ -43,7 +44,7 @@ hash类型，zset类型，采用方案一
 方案二
 
     t_task
-        $id {"handler":"","param":"","status":"","retryStrategy":"","retryInterval":"","nextTime":"","lastTime":"","firstTime":""}
+        $id {"handler":"","task_object":"","param":"","status":"","retryStrategy":"","retryInterval":"","nextTime":"","lastTime":"","firstTime":""}
 
 
 #### 子任务信息
