@@ -30,7 +30,7 @@ hash类型，zset类型，采用方案一
 
 方案一
 
-	t_task:$id
+	t_task:$task_key
         handler
         task_object
         param
@@ -44,14 +44,18 @@ hash类型，zset类型，采用方案一
 方案二
 
     t_task
-        $id {"handler":"","task_object":"","param":"","status":"","retryStrategy":"","retryInterval":"","nextTime":"","lastTime":"","firstTime":""}
+        $task_key {"handler":"","task_object":"","param":"","status":"","retryStrategy":"","retryInterval":"","nextTime":"","lastTime":"","firstTime":""}
 
+等待处理队列: t_task:waiting
+处理中队列: t_task:doing
+成功队列: t_task:successful
+失败队列: t_task:failed
 
 #### 子任务信息
 hash类型，采用方案二，检查子任务状态
 
 方案一
-    t_child_task:$id:$child_handler
+    t_child_task:$task_key:$child_handler
         handler
         status
         last_time
@@ -59,7 +63,7 @@ hash类型，采用方案二，检查子任务状态
 
 方案二
 
-    t_child_task:$id
+    t_child_task:$task_key
         $child_handler:handler
         $child_handler:status
         $child_handler:last_time
@@ -67,13 +71,13 @@ hash类型，采用方案二，检查子任务状态
 
 方案三
 
-    t_child_task:$id
+    t_child_task:$task_key
         $child_handler {"handler":"","status":"","lastTime":"","firstTime":""}
 
 #### 任务变更
 hash类型
 
-    t_task_change:$id
+    t_task_change:$task_key
         $change_type:changeType 1
         $change_type:status 0
         $change_type:errorCode 0
