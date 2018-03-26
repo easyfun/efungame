@@ -31,8 +31,8 @@ hash类型，zset类型，采用方案一
 方案一
 
 	t_task:$task_key
+        task_key
         handler
-        task_object
         param
         status
         retry_strategy
@@ -44,7 +44,7 @@ hash类型，zset类型，采用方案一
 方案二
 
     t_task
-        $task_key {"handler":"","task_object":"","param":"","status":"","retryStrategy":"","retryInterval":"","nextTime":"","lastTime":"","firstTime":""}
+        $task_key {"handler":"","param":"","status":"","retryStrategy":"","retryInterval":"","nextTime":"","lastTime":"","firstTime":""}
 
 等待处理队列: t_task:waiting
 处理中队列: t_task:doing
