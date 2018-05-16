@@ -65,3 +65,30 @@ $mysql_exec $db -e "create table t_task_change (
   index idx_task_key (task_key),
   index idx_apply_time (apply_time)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 comment '任务变更信息表';"
+
+
+### 简化版任务
+create table t_task (
+  `id` bigint unsigned not null auto_increment comment 'id',
+  `task_key` VARCHAR(80) not null comment '任务key',
+  `param` VARCHAR(1024) default null comment '参数',
+  `handler` VARCHAR(100) not null comment '处理器',
+  `business` VARCHAR(100) NOT NULL COMMENT '业务',
+  `retry_strategy` int not null comment '重试策略',
+  `retry_interval` int not null comment '重试间隔ms',
+  `max_retry_times` int not null comment '最大重试次数',
+  `task_status` int not null comment '执行状态',
+  `progress` INT NOT NULL DEFAULT -1 COMMENT '子任务执行速度',
+  `retried_times` int not null comment '已重试次数',
+  `created_time` datetime not null comment '创建时间',
+  `first_time` datetime default null comment '首次执行时间',
+  `last_time` datetime default null comment '最近执行时间',
+  `next_time` datetime not null comment '下次执行时间',
+  `done_time` datetime default null comment '完成时间',
+  `updated_time` datetime not null comment '更新时间',
+  primary key (`id`),
+  index `idx_task_key` (`task_key`),
+  INDEX `idx_created_time` (`created_time`),
+  index `idx_done_time` (`done_time`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 comment '任务信息表';
+

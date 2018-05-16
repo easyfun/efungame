@@ -181,7 +181,7 @@ t_task:executing
 
 
 ###任务生成
-1.入pending，当前时间+5分
+1.入pending，nextTime+30分
 2.入info
 3.入executing，当前时间
 
@@ -193,17 +193,17 @@ pending任务处理，找不到info丢掉
 mysql对账，补充任务
 
 情况3:入executing失败
-pending任务处理，入executing/当前时间，入pending/当前时间+5分
+pending任务处理，入executing/当前时间，入pending/nextTime+30分
 
 
 ###任务消费
 1.取executing
 2.取info
 
-查不到info，丢掉
+查不到info，丢掉 
 成功，修改info，入pending，当前时间
 失败，修改info，入pending，当前时间
-重试，修改info，入executing/当前时间+重试间隔，入pending/当前时间+5分
+重试，修改info，入executing/当前时间+重试间隔，入pending/nextTime+30分
 
 ####重试
 情况1:入executing失败，pending任务处理，入executing重试
@@ -222,7 +222,7 @@ pending任务处理，入executing/当前时间，入pending/当前时间+5分
 情况2:删除info失败，等待重试
 情况3:删除pending失败，等待重试
 
-超时，入pending/当前时间+5分，入executing/当前时间
+超时，入pending/nextTime+30分，入executing/nextTime
 
 
 
