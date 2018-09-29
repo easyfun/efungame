@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.efun.game</groupId>
+    <artifactId>efg_web</artifactId>
+    <version>0.1.1-SNAPSHOT</version>
+  </parent>
+  <artifactId>efg_web_test_client</artifactId>
+  <version>1.1.1-SNAPSHOT</version>
+  <name>efg_web_test_client</name>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <version.efg_common>1.0.1-SNAPSHOT</version.efg_common>
+    <version.httpclient>4.3.6</version.httpclient>
+  </properties>
+  <dependencies>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.8</version>
+        </dependency>
+        <dependency>
+            <groupId>com.efun.game</groupId>
+            <artifactId>efg_common</artifactId>
+            <version>${version.efg_common}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>${version.httpclient}</version>
+        </dependency>
+  </dependencies>
+</project>

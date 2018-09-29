@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd 
+      http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
+      http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+      http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+
+<!-- 	<bean id="sqliteDataSource" class="com.alibaba.druid.pool.DruidDataSource"
+		init-method="init" destroy-method="close">
+		基本属性 url、user、password
+		<property name="dbType" value="${sqlite.jdbc.dbType}"></property>
+		<property name="driverClassName" value="${sqlite.jdbc.driverClassName}"></property>
+		<property name="url" value="${sqlite.jdbc.url}" />
+		<property name="username" value="${sqlite.jdbc.user}" />
+		<property name="password" value="${sqlite.jdbc.password}" />
+
+		配置初始化大小、最小、最大
+		<property name="initialSize" value="${sqlite.dataSource.initialSize}" />
+		<property name="minIdle" value="${sqlite.dataSource.maxIdle}" />
+		<property name="maxActive" value="${sqlite.dataSource.maxActive}" />
+
+		配置获取连接等待超时的时间
+		<property name="maxWait" value="${sqlite.dataSource.maxWait}" />
+
+		配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+		<property name="timeBetweenEvictionRunsMillis"
+			value="${sqlite.datasource.timeBetweenEvictionRunsMillis}" />
+
+		配置一个连接在池中最小生存的时间，单位是毫秒
+		<property name="minEvictableIdleTimeMillis"
+			value="${sqlite.datasource.minEvictableIdleTimeMillis}" />
+
+		<property name="validationQuery" value="${sqlite.datasource.validationQuery}" />
+		<property name="testWhileIdle" value="${sqlite.dataSource.testWhileIdle:true}" />
+		<property name="testOnBorrow" value="${sqlite.dataSource.testOnBorrow:false}" />
+		<property name="testOnReturn" value="${sqlite.dataSource.testOnReturn:false}" />
+
+		打开PSCache，并且指定每个连接上PSCache的大小
+		<property name="poolPreparedStatements"
+			value="${sqlite.dataSource.poolPreparedStatements:false}" />
+		<property name="maxPoolPreparedStatementPerConnectionSize"
+			value="20" />
+
+		配置监控统计拦截的filters
+		<property name="filters" value="stat" />
+	</bean>
+
+	扫描basePackage下所有以@MyBatisDao注解的接口
+	<bean id="sqliteMapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="sqlSessionFactoryBeanName" value="sqliteSessionFactory" />
+		<property name="basePackage" value="com.efun.game.task.dao.sqlite" />
+	</bean>
+
+	define the SqlSessionFactory
+	<bean id="sqliteSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="sqliteDataSource" />
+		<property name="configLocation" value="classpath:/mybatis/mybatis_config.xml" />
+		<property name="mapperLocations">
+			<list>
+				<value>classpath*:mybatis/mapper/task/sqlite/*.xml</value>
+			</list>
+		</property>
+	</bean>
+
+	事务支持
+	<bean id="sqliteTransactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="sqliteDataSource" />
+	</bean>
+
+	开启注解事务支持
+	<tx:annotation-driven transaction-manager="sqliteTransactionManager"
+		proxy-target-class="true" />
+
+	拦截器方式配置事物
+	<tx:advice id="sqliteTransactionAdvice"
+		transaction-manager="sqliteTransactionManager">
+		<tx:attributes>
+			<tx:method name="insert*" propagation="REQUIRED" />
+			<tx:method name="update*" propagation="REQUIRED" />
+			<tx:method name="delete*" propagation="REQUIRED" />
+			<tx:method name="get*" propagation="SUPPORTS" read-only="true" />
+			<tx:method name="find*" propagation="SUPPORTS" read-only="true" />
+			<tx:method name="select*" propagation="SUPPORTS" read-only="true" />
+		</tx:attributes>
+	</tx:advice>
+
+	独立事务(事务隔离)
+	<tx:advice id="sqliteIndependentTransactionAdvice" transaction-manager="sqliteTransactionManager">
+		<tx:attributes>
+			<tx:method name="*" propagation="REQUIRES_NEW" />
+		</tx:attributes>
+	</tx:advice>
+
+	<aop:config>
+		<aop:pointcut id="sqliteTransactionServicePointcut"
+			expression="execution(* com.efun.game.task.service.impl.TaskServiceImpl.*(..))" />
+		<aop:advisor pointcut-ref="sqliteTransactionServicePointcut"
+			advice-ref="sqliteTransactionAdvice" />
+	</aop:config>
+
+    <aop:config>
+        <aop:pointcut id="sqliteIndependentTransactionPointcut"
+            expression="execution(* com.efun.game.task.service.impl.SqliteIndependentTransactionServiceImpl.*(..))" />
+        <aop:advisor pointcut-ref="sqliteIndependentTransactionPointcut"
+            advice-ref="sqliteIndependentTransactionAdvice" />
+    </aop:config>
+ -->
+ </beans>
+

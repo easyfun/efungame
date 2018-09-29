@@ -1,0 +1,4 @@
+mexc_sun_member.sql用户相关建表脚本
+mexc_sun_product.sql市场，虚拟币相关建表脚本
+mexc_sun_trade.sql交易相关建表脚本
+mexc_sun_plat_manager.sql平台管理相关建表脚本

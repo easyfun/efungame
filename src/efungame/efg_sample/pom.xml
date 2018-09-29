@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.efun.game</groupId>
+    <artifactId>efungame</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+  <artifactId>efg_sample</artifactId>
+  <version>0.1.1-SNAPSHOT</version>
+  <name>efg_sample</name>
+  <packaging>pom</packaging>
+  <properties>
+    <version.efg_common>1.0.1-SNAPSHOT</version.efg_common>
+    <version.efg_network>1.0.1-SNAPSHOT</version.efg_network>
+    <version.efg_protobuf>1.0.1-SNAPSHOT</version.efg_protobuf>
+  </properties>
+  <dependencies>
+    <dependency>
+      <groupId>com.efun.game</groupId>
+      <artifactId>efg_common</artifactId>
+      <version>${version.efg_common}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.efun.game</groupId>
+      <artifactId>efg_network</artifactId>
+      <version>${version.efg_network}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.efun.game</groupId>
+      <artifactId>efg_protobuf</artifactId>
+      <version>${version.efg_protobuf}</version>
+    </dependency>
+  </dependencies>
+  <modules>
+  	<module>efg_sample_server</module>
+    <module>efg_sample_client</module>
+  </modules>
+</project>

@@ -1,0 +1,9 @@
+syntax = "proto2";
+package protobuf.app.user;
+option java_package = "com.efun.game.protobuf.app.user";
+option java_outer_classname = "UserSignUpRespProto";
+import "BaseResp.proto";
+
+message UserSignUpResp {
+    required BaseResp baseResp = 1; // 处理结果
+}

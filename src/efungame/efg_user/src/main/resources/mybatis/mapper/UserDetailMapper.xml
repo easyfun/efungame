@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.efun.game.user.dao.UserDetailMapper">
+  <resultMap id="BaseResultMap" type="com.efun.game.user.entity.UserDetail">
+    <id column="uid" jdbcType="BIGINT" property="uid" />
+    <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
+    <result column="head_picture_url" jdbcType="VARCHAR" property="headPictureUrl" />
+    <result column="gender" jdbcType="TINYINT" property="gender" typeHandler="IEnumTypeHandler" />
+    <result column="real_name" jdbcType="VARCHAR" property="realName" />
+    <result column="birthday" jdbcType="TIMESTAMP" property="birthday" />
+    <result column="age" jdbcType="INTEGER" property="age" />
+    <result column="marriage_status" jdbcType="TINYINT" property="marriageStatus" typeHandler="IEnumTypeHandler" />
+    <result column="education" jdbcType="VARCHAR" property="education" />
+    <result column="security_level" jdbcType="TINYINT" property="securityLevel" typeHandler="IEnumTypeHandler" />
+    <result column="city_code" jdbcType="VARCHAR" property="cityCode" />
+    <result column="pro_code" jdbcType="VARCHAR" property="proCode" />
+    <result column="sign_up_ip" jdbcType="VARCHAR" property="signUpIp" />
+    <result column="sign_up_channel" jdbcType="VARCHAR" property="signUpChannel" />
+    <result column="sign_up_app_type" jdbcType="TINYINT" property="signUpAppType" typeHandler="IEnumTypeHandler" />
+    <result column="sign_up_date" jdbcType="TIMESTAMP" property="signUpDate" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    uid, nick_name, head_picture_url, gender, real_name, birthday, age, marriage_status, 
+    education, security_level, city_code, pro_code, sign_up_ip, sign_up_channel, sign_up_app_type, 
+    sign_up_date, update_time, create_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_user_detail
+    where uid = #{uid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_user_detail
+    where uid = #{uid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.efun.game.user.entity.UserDetail">
+    insert into t_user_detail (uid, nick_name, head_picture_url, 
+      gender, real_name, birthday, 
+      age, marriage_status, education, 
+      security_level, city_code, pro_code, 
+      sign_up_ip, sign_up_channel, sign_up_app_type, 
+      sign_up_date, update_time, create_time
+      )
+    values (#{uid,jdbcType=BIGINT}, #{nickName,jdbcType=VARCHAR}, #{headPictureUrl,jdbcType=VARCHAR}, 
+      #{gender,jdbcType=TINYINT,typeHandler=IEnumTypeHandler}, #{realName,jdbcType=VARCHAR}, #{birthday,jdbcType=TIMESTAMP}, 
+      #{age,jdbcType=INTEGER}, #{marriageStatus,jdbcType=TINYINT,typeHandler=IEnumTypeHandler}, #{education,jdbcType=VARCHAR}, 
+      #{securityLevel,jdbcType=TINYINT,typeHandler=IEnumTypeHandler}, #{cityCode,jdbcType=VARCHAR}, #{proCode,jdbcType=VARCHAR}, 
+      #{signUpIp,jdbcType=VARCHAR}, #{signUpChannel,jdbcType=VARCHAR}, #{signUpAppType,jdbcType=TINYINT,typeHandler=IEnumTypeHandler}, 
+      #{signUpDate,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.efun.game.user.entity.UserDetail">
+    insert into t_user_detail
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="uid != null">
+        uid,
+      </if>
+      <if test="nickName != null">
+        nick_name,
+      </if>
+      <if test="headPictureUrl != null">
+        head_picture_url,
+      </if>
+      <if test="gender != null">
+        gender,
+      </if>
+      <if test="realName != null">
+        real_name,
+      </if>
+      <if test="birthday != null">
+        birthday,
+      </if>
+      <if test="age != null">
+        age,
+      </if>
+      <if test="marriageStatus != null">
+        marriage_status,
+      </if>
+      <if test="education != null">
+        education,
+      </if>
+      <if test="securityLevel != null">
+        security_level,
+      </if>
+      <if test="cityCode != null">
+        city_code,
+      </if>
+      <if test="proCode != null">
+        pro_code,
+      </if>
+      <if test="signUpIp != null">
+        sign_up_ip,
+      </if>
+      <if test="signUpChannel != null">
+        sign_up_channel,
+      </if>
+      <if test="signUpAppType != null">
+        sign_up_app_type,
+      </if>
+      <if test="signUpDate != null">
+        sign_up_date,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="uid != null">
+        #{uid,jdbcType=BIGINT},
+      </if>
+      <if test="nickName != null">
+        #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="headPictureUrl != null">
+        #{headPictureUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null">
+        #{gender,jdbcType=TINYINT,typeHandler=IEnumTypeHandler},
+      </if>
+      <if test="realName != null">
+        #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null">
+        #{birthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="age != null">
+        #{age,jdbcType=INTEGER},
+      </if>
+      <if test="marriageStatus != null">
+        #{marriageStatus,jdbcType=TINYINT,typeHandler=IEnumTypeHandler},
+      </if>
+      <if test="education != null">
+        #{education,jdbcType=VARCHAR},
+      </if>
+      <if test="securityLevel != null">
+        #{securityLevel,jdbcType=TINYINT,typeHandler=IEnumTypeHandler},
+      </if>
+      <if test="cityCode != null">
+        #{cityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="proCode != null">
+        #{proCode,jdbcType=VARCHAR},
+      </if>
+      <if test="signUpIp != null">
+        #{signUpIp,jdbcType=VARCHAR},
+      </if>
+      <if test="signUpChannel != null">
+        #{signUpChannel,jdbcType=VARCHAR},
+      </if>
+      <if test="signUpAppType != null">
+        #{signUpAppType,jdbcType=TINYINT,typeHandler=IEnumTypeHandler},
+      </if>
+      <if test="signUpDate != null">
+        #{signUpDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.efun.game.user.entity.UserDetail">
+    update t_user_detail
+    <set>
+      <if test="nickName != null">
+        nick_name = #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="headPictureUrl != null">
+        head_picture_url = #{headPictureUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null">
+        gender = #{gender,jdbcType=TINYINT,typeHandler=IEnumTypeHandler},
+      </if>
+      <if test="realName != null">
+        real_name = #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null">
+        birthday = #{birthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="age != null">
+        age = #{age,jdbcType=INTEGER},
+      </if>
+      <if test="marriageStatus != null">
+        marriage_status = #{marriageStatus,jdbcType=TINYINT,typeHandler=IEnumTypeHandler},
+      </if>
+      <if test="education != null">
+        education = #{education,jdbcType=VARCHAR},
+      </if>
+      <if test="securityLevel != null">
+        security_level = #{securityLevel,jdbcType=TINYINT,typeHandler=IEnumTypeHandler},
+      </if>
+      <if test="cityCode != null">
+        city_code = #{cityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="proCode != null">
+        pro_code = #{proCode,jdbcType=VARCHAR},
+      </if>
+      <if test="signUpIp != null">
+        sign_up_ip = #{signUpIp,jdbcType=VARCHAR},
+      </if>
+      <if test="signUpChannel != null">
+        sign_up_channel = #{signUpChannel,jdbcType=VARCHAR},
+      </if>
+      <if test="signUpAppType != null">
+        sign_up_app_type = #{signUpAppType,jdbcType=TINYINT,typeHandler=IEnumTypeHandler},
+      </if>
+      <if test="signUpDate != null">
+        sign_up_date = #{signUpDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where uid = #{uid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.efun.game.user.entity.UserDetail">
+    update t_user_detail
+    set nick_name = #{nickName,jdbcType=VARCHAR},
+      head_picture_url = #{headPictureUrl,jdbcType=VARCHAR},
+      gender = #{gender,jdbcType=TINYINT,typeHandler=IEnumTypeHandler},
+      real_name = #{realName,jdbcType=VARCHAR},
+      birthday = #{birthday,jdbcType=TIMESTAMP},
+      age = #{age,jdbcType=INTEGER},
+      marriage_status = #{marriageStatus,jdbcType=TINYINT,typeHandler=IEnumTypeHandler},
+      education = #{education,jdbcType=VARCHAR},
+      security_level = #{securityLevel,jdbcType=TINYINT,typeHandler=IEnumTypeHandler},
+      city_code = #{cityCode,jdbcType=VARCHAR},
+      pro_code = #{proCode,jdbcType=VARCHAR},
+      sign_up_ip = #{signUpIp,jdbcType=VARCHAR},
+      sign_up_channel = #{signUpChannel,jdbcType=VARCHAR},
+      sign_up_app_type = #{signUpAppType,jdbcType=TINYINT,typeHandler=IEnumTypeHandler},
+      sign_up_date = #{signUpDate,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where uid = #{uid,jdbcType=BIGINT}
+  </update>
+</mapper>

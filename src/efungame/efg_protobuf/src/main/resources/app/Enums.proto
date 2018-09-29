@@ -1,0 +1,26 @@
+syntax = "proto2";
+package protobuf.app;
+option java_package = "com.efun.game.protobuf.app";
+option java_outer_classname = "EnumsProto";
+
+enum UserType {
+    // 用户类型: 1-用户名; 2-手机号; 3-身份证; 4-邮箱
+    USER_NAME = 1; // 用户名
+    USER_MOBILE = 2; // 手机号
+    USER_ID_CARD = 3; // 身份证
+    USER_EMAIL = 4; // 邮箱
+}
+
+enum AppType {
+    // 0-未知; 1-Web; 2-IOS; 3-Andriod
+    APP_UNKNOWN = 0; // 未知
+    APP_WEB = 1; // Web
+    APP_IOS = 2; // IOS
+    APP_ANDRIOD = 3; // Andriod
+}
+
+enum UserSignInStatus {
+	// 0-离线; 1-上线
+	OFF_LINE = 0; // 离线
+	ON_LINE =1; // 上线
+}

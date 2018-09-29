@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.efun.game.task.dao.mysql.TaskDAO">
+  <resultMap id="BaseResultMap" type="com.efun.game.task.entity.po.mysql.TaskPO">
+    <id column="task_id" jdbcType="BIGINT" property="taskId" />
+    <result column="task_key" jdbcType="VARCHAR" property="taskKey" />
+    <result column="handler" jdbcType="VARCHAR" property="handler" />
+    <result column="param" jdbcType="VARCHAR" property="param" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="retry_strategy" jdbcType="TINYINT" property="retryStrategy"  typeHandler="IEnumTypeHandler" />
+    <result column="retry_interval" jdbcType="INTEGER" property="retryInterval" />
+    <result column="max_retry_time" jdbcType="INTEGER" property="maxRetryTime" />
+    <result column="next_time" jdbcType="TIMESTAMP" property="nextTime" />
+    <result column="last_time" jdbcType="TIMESTAMP" property="lastTime" />
+    <result column="first_time" jdbcType="TIMESTAMP" property="firstTime" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    task_id, task_key, handler, param, status, retry_strategy, retry_interval, max_retry_time, 
+    next_time, last_time, first_time, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_task
+    where task_id = #{taskId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_task
+    where task_id = #{taskId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.efun.game.task.entity.po.mysql.TaskPO">
+    insert into t_task (task_id, task_key, handler, 
+      param, status, retry_strategy, 
+      retry_interval, max_retry_time, next_time, 
+      last_time, first_time, create_time, 
+      update_time)
+    values (#{taskId,jdbcType=BIGINT}, #{taskKey,jdbcType=VARCHAR}, #{handler,jdbcType=VARCHAR}, 
+      #{param,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{retryStrategy,jdbcType=TINYINT,typeHandler=IEnumTypeHandler}, 
+      #{retryInterval,jdbcType=INTEGER}, #{maxRetryTime,jdbcType=INTEGER}, #{nextTime,jdbcType=TIMESTAMP}, 
+      #{lastTime,jdbcType=TIMESTAMP}, #{firstTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.efun.game.task.entity.po.mysql.TaskPO">
+    insert into t_task
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="taskId != null">
+        task_id,
+      </if>
+      <if test="taskKey != null">
+        task_key,
+      </if>
+      <if test="handler != null">
+        handler,
+      </if>
+      <if test="param != null">
+        param,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="retryStrategy != null">
+        retry_strategy,
+      </if>
+      <if test="retryInterval != null">
+        retry_interval,
+      </if>
+      <if test="maxRetryTime != null">
+        max_retry_time,
+      </if>
+      <if test="nextTime != null">
+        next_time,
+      </if>
+      <if test="lastTime != null">
+        last_time,
+      </if>
+      <if test="firstTime != null">
+        first_time,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="taskId != null">
+        #{taskId,jdbcType=BIGINT},
+      </if>
+      <if test="taskKey != null">
+        #{taskKey,jdbcType=VARCHAR},
+      </if>
+      <if test="handler != null">
+        #{handler,jdbcType=VARCHAR},
+      </if>
+      <if test="param != null">
+        #{param,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="retryStrategy != null">
+        #{retryStrategy,jdbcType=TINYINT,typeHandler=IEnumTypeHandler},
+      </if>
+      <if test="retryInterval != null">
+        #{retryInterval,jdbcType=INTEGER},
+      </if>
+      <if test="maxRetryTime != null">
+        #{maxRetryTime,jdbcType=INTEGER},
+      </if>
+      <if test="nextTime != null">
+        #{nextTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastTime != null">
+        #{lastTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="firstTime != null">
+        #{firstTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.efun.game.task.entity.po.mysql.TaskPO">
+    update t_task
+    <set>
+      <if test="taskKey != null">
+        task_key = #{taskKey,jdbcType=VARCHAR},
+      </if>
+      <if test="handler != null">
+        handler = #{handler,jdbcType=VARCHAR},
+      </if>
+      <if test="param != null">
+        param = #{param,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="retryStrategy != null">
+        retry_strategy = #{retryStrategy,jdbcType=TINYINT,typeHandler=IEnumTypeHandler},
+      </if>
+      <if test="retryInterval != null">
+        retry_interval = #{retryInterval,jdbcType=INTEGER},
+      </if>
+      <if test="maxRetryTime != null">
+        max_retry_time = #{maxRetryTime,jdbcType=INTEGER},
+      </if>
+      <if test="nextTime != null">
+        next_time = #{nextTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastTime != null">
+        last_time = #{lastTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="firstTime != null">
+        first_time = #{firstTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where task_id = #{taskId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.efun.game.task.entity.po.mysql.TaskPO">
+    update t_task
+    set task_key = #{taskKey,jdbcType=VARCHAR},
+      handler = #{handler,jdbcType=VARCHAR},
+      param = #{param,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      retry_strategy = #{retryStrategy,jdbcType=TINYINT,typeHandler=IEnumTypeHandler},
+      retry_interval = #{retryInterval,jdbcType=INTEGER},
+      max_retry_time = #{maxRetryTime,jdbcType=INTEGER},
+      next_time = #{nextTime,jdbcType=TIMESTAMP},
+      last_time = #{lastTime,jdbcType=TIMESTAMP},
+      first_time = #{firstTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where task_id = #{taskId,jdbcType=BIGINT}
+  </update>
+</mapper>

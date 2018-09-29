@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.efun.wallet.dao.BtcRechargeRegionSyncTaskDetailDAO">
+  <resultMap id="BaseResultMap" type="com.efun.wallet.entity.BtcRechargeRegionSyncTaskDetail">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="coin_market_name" jdbcType="VARCHAR" property="coinMarketName" />
+    <result column="batch_id" jdbcType="BIGINT" property="batchId" />
+    <result column="counts" jdbcType="BIGINT" property="counts" />
+    <result column="froms" jdbcType="BIGINT" property="froms" />
+    <result column="STATUS" jdbcType="INTEGER" property="status" />
+    <result column="fail_reason" jdbcType="VARCHAR" property="failReason" />
+    <result column="txid" jdbcType="VARCHAR" property="txid" />
+    <result column="category" jdbcType="VARCHAR" property="category" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="account" jdbcType="VARCHAR" property="account" />
+    <result column="amount" jdbcType="VARCHAR" property="amount" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, coin_market_name, batch_id, counts, froms, STATUS, fail_reason, txid, category, 
+    address, account, amount, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_mexc_btc_recharge_region_sync_task_detail
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectByBlockNumberAndTransactionIndex" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_mexc_btc_recharge_region_sync_task_detail
+    where block_number = #{blockNumber,jdbcType=BIGINT}
+    and transaction_index = #{transactionIndex,jdbcType=BIGINT}
+  </select>
+  <select id="selectByBatchId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_mexc_btc_recharge_region_sync_task_detail
+    where batch_id = #{batchId,jdbcType=BIGINT}
+  </select>
+  <select id="selectByTxIdAndCategoryAndAddressAndAccount" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_mexc_btc_recharge_region_sync_task_detail
+    where txid = #{txid,jdbcType=VARCHAR}
+    and category = #{category,jdbcType=VARCHAR}
+    and address = #{address,jdbcType=VARCHAR}
+    and account = #{account,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByTxId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_mexc_btc_recharge_region_sync_task_detail
+    where txid = #{txid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_mexc_btc_recharge_region_sync_task_detail
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.efun.wallet.entity.BtcRechargeRegionSyncTaskDetail">
+    insert into t_mexc_btc_recharge_region_sync_task_detail (id, coin_market_name, batch_id, 
+      counts, froms, STATUS, 
+      fail_reason, txid, category, 
+      address, account, amount, 
+      create_time, update_time)
+    values (#{id,jdbcType=BIGINT}, #{coinMarketName,jdbcType=VARCHAR}, #{batchId,jdbcType=BIGINT}, 
+      #{counts,jdbcType=BIGINT}, #{froms,jdbcType=BIGINT}, #{status,jdbcType=INTEGER}, 
+      #{failReason,jdbcType=VARCHAR}, #{txid,jdbcType=VARCHAR}, #{category,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{account,jdbcType=VARCHAR}, #{amount,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertList" parameterType="com.efun.wallet.entity.BtcRechargeRegionSyncTaskDetail">
+    insert into t_mexc_btc_recharge_region_sync_task_detail (id, coin_market_name, batch_id,
+    counts, froms, STATUS,
+    fail_reason, txid, category,
+    address, account, amount,
+    create_time, update_time) values
+    <foreach collection="list" item="item" index="index" separator=",">
+    (#{item.id,jdbcType=BIGINT}, #{item.coinMarketName,jdbcType=VARCHAR}, #{item.batchId,jdbcType=BIGINT},
+    #{item.counts,jdbcType=BIGINT}, #{item.froms,jdbcType=BIGINT}, #{item.status,jdbcType=INTEGER},
+    #{item.failReason,jdbcType=VARCHAR}, #{item.txid,jdbcType=VARCHAR}, #{item.category,jdbcType=VARCHAR},
+    #{item.address,jdbcType=VARCHAR}, #{item.account,jdbcType=VARCHAR}, #{item.amount,jdbcType=VARCHAR},
+    #{item.createTime,jdbcType=TIMESTAMP}, #{item.updateTime,jdbcType=TIMESTAMP})
+    </foreach>
+  </insert>
+  <insert id="insertSelective" parameterType="com.efun.wallet.entity.BtcRechargeRegionSyncTaskDetail">
+    insert into t_mexc_btc_recharge_region_sync_task_detail
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="coinMarketName != null">
+        coin_market_name,
+      </if>
+      <if test="batchId != null">
+        batch_id,
+      </if>
+      <if test="counts != null">
+        counts,
+      </if>
+      <if test="froms != null">
+        froms,
+      </if>
+      <if test="status != null">
+        STATUS,
+      </if>
+      <if test="failReason != null">
+        fail_reason,
+      </if>
+      <if test="txid != null">
+        txid,
+      </if>
+      <if test="category != null">
+        category,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="account != null">
+        account,
+      </if>
+      <if test="amount != null">
+        amount,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="coinMarketName != null">
+        #{coinMarketName,jdbcType=VARCHAR},
+      </if>
+      <if test="batchId != null">
+        #{batchId,jdbcType=BIGINT},
+      </if>
+      <if test="counts != null">
+        #{counts,jdbcType=BIGINT},
+      </if>
+      <if test="froms != null">
+        #{froms,jdbcType=BIGINT},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="failReason != null">
+        #{failReason,jdbcType=VARCHAR},
+      </if>
+      <if test="txid != null">
+        #{txid,jdbcType=VARCHAR},
+      </if>
+      <if test="category != null">
+        #{category,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="account != null">
+        #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null">
+        #{amount,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.efun.wallet.entity.BtcRechargeRegionSyncTaskDetail">
+    update t_mexc_btc_recharge_region_sync_task_detail
+    <set>
+      <if test="coinMarketName != null">
+        coin_market_name = #{coinMarketName,jdbcType=VARCHAR},
+      </if>
+      <if test="batchId != null">
+        batch_id = #{batchId,jdbcType=BIGINT},
+      </if>
+      <if test="counts != null">
+        counts = #{counts,jdbcType=BIGINT},
+      </if>
+      <if test="froms != null">
+        froms = #{froms,jdbcType=BIGINT},
+      </if>
+      <if test="status != null">
+        STATUS = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="failReason != null">
+        fail_reason = #{failReason,jdbcType=VARCHAR},
+      </if>
+      <if test="txid != null">
+        txid = #{txid,jdbcType=VARCHAR},
+      </if>
+      <if test="category != null">
+        category = #{category,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="account != null">
+        account = #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null">
+        amount = #{amount,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.efun.wallet.entity.BtcRechargeRegionSyncTaskDetail">
+    update t_mexc_btc_recharge_region_sync_task_detail
+    set coin_market_name = #{coinMarketName,jdbcType=VARCHAR},
+      batch_id = #{batchId,jdbcType=BIGINT},
+      counts = #{counts,jdbcType=BIGINT},
+      froms = #{froms,jdbcType=BIGINT},
+      STATUS = #{status,jdbcType=INTEGER},
+      fail_reason = #{failReason,jdbcType=VARCHAR},
+      txid = #{txid,jdbcType=VARCHAR},
+      category = #{category,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      account = #{account,jdbcType=VARCHAR},
+      amount = #{amount,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

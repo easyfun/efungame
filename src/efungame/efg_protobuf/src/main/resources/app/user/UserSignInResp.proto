@@ -1,0 +1,15 @@
+syntax = "proto2";
+package protobuf.app.user;
+option java_package = "com.efun.game.protobuf.app.user";
+option java_outer_classname = "UserSingInRespProto";
+import "BaseResp.proto";
+
+message UserSignInResp {
+    required BaseResp baseResp = 1; // 处理结果
+    optional fixed64 uid = 2; // 用户id
+    optional fixed64 sessionId = 3; 
+    optional string loginIp = 4; // 登录ip
+    optional string nickName = 5; // 昵称
+    optional string headPictureUrl = 6; // 头像地址
+    optional string gender = 7; // 性别
+}

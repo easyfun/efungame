@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.efun.game</groupId>
+    <artifactId>efungame</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+  <artifactId>efg_service</artifactId>
+  <version>1.0.1-SNAPSHOT</version>
+  <name>efg_service</name>
+  <properties>
+    <version.efg_common>1.0.1-SNAPSHOT</version.efg_common>
+    <version.efg_protobuf>1.0.1-SNAPSHOT</version.efg_protobuf>
+  </properties>
+  <dependencies>
+    <dependency>
+      <groupId>com.efun.game</groupId>
+      <artifactId>efg_common</artifactId>
+      <version>${version.efg_common}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.efun.game</groupId>
+      <artifactId>efg_protobuf</artifactId>
+      <version>${version.efg_protobuf}</version>
+    </dependency>
+  </dependencies>
+</project>

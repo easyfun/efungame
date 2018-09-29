@@ -1,0 +1,17 @@
+syntax = "proto2";
+package protobuf.api;
+option java_package = "com.efun.game.protobuf.api";
+option java_outer_classname = "HeaderProto";
+
+import "CommandId.proto";
+import "EncryptionType.proto";
+import "CodeType.proto";
+
+message Header {
+    required fixed32 crcCode = 1; // 消息校验码：固定值+主版本号+次版本号, 2个字节+1个字节+1个字节
+    required fixed64 id = 2; // id: 会话Id内唯一
+    required CommandId commandId = 3; // 业务Id：全局唯一
+    required fixed32 sessionId = 4; // 会话Id，集群全局唯一
+    required EncryptionType encryptionType = 5; // 加密类型: 0-不加密
+    required CodeType codeType = 6; // 编解码类型: 0-protobuf; 1-json 
+}

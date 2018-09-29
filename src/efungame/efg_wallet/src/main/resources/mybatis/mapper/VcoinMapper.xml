@@ -1,0 +1,406 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.efun.wallet.dao.VcoinDAO">
+  <resultMap id="BaseResultMap" type="com.efun.wallet.entity.Vcoin">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="vcoin_token" jdbcType="VARCHAR" property="vcoinToken" />
+    <result column="vcoin_name" jdbcType="VARCHAR" property="vcoinName" />
+    <result column="vcoin_name_en" jdbcType="VARCHAR" property="vcoinNameEn" />
+    <result column="vcoin_name_full" jdbcType="VARCHAR" property="vcoinNameFull" />
+    <result column="icon" jdbcType="VARCHAR" property="icon" />
+    <result column="sys_account" jdbcType="VARCHAR" property="sysAccount" />
+    <result column="trade_key" jdbcType="VARCHAR" property="tradeKey" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="can_cash" jdbcType="INTEGER" property="canCash" />
+    <result column="can_recharge" jdbcType="INTEGER" property="canRecharge" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
+    <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
+    <result column="updare_by_name" jdbcType="VARCHAR" property="updareByName" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="create_by_name" jdbcType="VARCHAR" property="createByName" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="main_coin" jdbcType="INTEGER" property="mainCoin" />
+    <result column="contract_address" jdbcType="VARCHAR" property="contractAddress" />
+    <result column="scale" jdbcType="INTEGER" property="scale" />
+    <result column="sys_recharge_block" jdbcType="INTEGER" property="sysRechargeBlock" />
+    <result column="sys_cash_block" jdbcType="INTEGER" property="sysCashBlock" />
+    <result column="threshold_hot_to_cold" jdbcType="VARCHAR" property="thresholdHotToCold" />
+    <result column="transfer_accounts_threshold" jdbcType="VARCHAR" property="transferAccountsThreshold" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.efun.wallet.entity.Vcoin">
+    <result column="note" jdbcType="LONGVARCHAR" property="note" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, vcoin_token, vcoin_name, vcoin_name_en, vcoin_name_full, icon, sys_account, trade_key, 
+    status, can_cash, can_recharge, sort, update_by, updare_by_name, update_time, create_by, 
+    create_by_name, create_time, main_coin, contract_address, scale, sys_recharge_block, 
+    sys_cash_block, threshold_hot_to_cold, transfer_accounts_threshold
+  </sql>
+  <sql id="Blob_Column_List">
+    note
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_mexc_vcoin
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByVcoinId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+      <include refid="Base_Column_List" />
+    from t_mexc_vcoin
+    where id = #{vcoinId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from t_mexc_vcoin
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.efun.wallet.entity.Vcoin">
+    insert into t_mexc_vcoin (id, vcoin_token, vcoin_name, 
+      vcoin_name_en, vcoin_name_full, icon, 
+      sys_account, trade_key, status, 
+      can_cash, can_recharge, sort, 
+      update_by, updare_by_name, update_time, 
+      create_by, create_by_name, create_time, 
+      main_coin, contract_address, scale, 
+      sys_recharge_block, sys_cash_block, threshold_hot_to_cold, 
+      transfer_accounts_threshold, note)
+    values (#{id,jdbcType=VARCHAR}, #{vcoinToken,jdbcType=VARCHAR}, #{vcoinName,jdbcType=VARCHAR}, 
+      #{vcoinNameEn,jdbcType=VARCHAR}, #{vcoinNameFull,jdbcType=VARCHAR}, #{icon,jdbcType=VARCHAR}, 
+      #{sysAccount,jdbcType=VARCHAR}, #{tradeKey,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
+      #{canCash,jdbcType=INTEGER}, #{canRecharge,jdbcType=INTEGER}, #{sort,jdbcType=INTEGER}, 
+      #{updateBy,jdbcType=VARCHAR}, #{updareByName,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{createBy,jdbcType=VARCHAR}, #{createByName,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{mainCoin,jdbcType=INTEGER}, #{contractAddress,jdbcType=VARCHAR}, #{scale,jdbcType=INTEGER}, 
+      #{sysRechargeBlock,jdbcType=INTEGER}, #{sysCashBlock,jdbcType=INTEGER}, #{thresholdHotToCold,jdbcType=VARCHAR}, 
+      #{transferAccountsThreshold,jdbcType=VARCHAR}, #{note,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.efun.wallet.entity.Vcoin">
+    insert into t_mexc_vcoin
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="vcoinToken != null">
+        vcoin_token,
+      </if>
+      <if test="vcoinName != null">
+        vcoin_name,
+      </if>
+      <if test="vcoinNameEn != null">
+        vcoin_name_en,
+      </if>
+      <if test="vcoinNameFull != null">
+        vcoin_name_full,
+      </if>
+      <if test="icon != null">
+        icon,
+      </if>
+      <if test="sysAccount != null">
+        sys_account,
+      </if>
+      <if test="tradeKey != null">
+        trade_key,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="canCash != null">
+        can_cash,
+      </if>
+      <if test="canRecharge != null">
+        can_recharge,
+      </if>
+      <if test="sort != null">
+        sort,
+      </if>
+      <if test="updateBy != null">
+        update_by,
+      </if>
+      <if test="updareByName != null">
+        updare_by_name,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+      <if test="createByName != null">
+        create_by_name,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="mainCoin != null">
+        main_coin,
+      </if>
+      <if test="contractAddress != null">
+        contract_address,
+      </if>
+      <if test="scale != null">
+        scale,
+      </if>
+      <if test="sysRechargeBlock != null">
+        sys_recharge_block,
+      </if>
+      <if test="sysCashBlock != null">
+        sys_cash_block,
+      </if>
+      <if test="thresholdHotToCold != null">
+        threshold_hot_to_cold,
+      </if>
+      <if test="transferAccountsThreshold != null">
+        transfer_accounts_threshold,
+      </if>
+      <if test="note != null">
+        note,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="vcoinToken != null">
+        #{vcoinToken,jdbcType=VARCHAR},
+      </if>
+      <if test="vcoinName != null">
+        #{vcoinName,jdbcType=VARCHAR},
+      </if>
+      <if test="vcoinNameEn != null">
+        #{vcoinNameEn,jdbcType=VARCHAR},
+      </if>
+      <if test="vcoinNameFull != null">
+        #{vcoinNameFull,jdbcType=VARCHAR},
+      </if>
+      <if test="icon != null">
+        #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="sysAccount != null">
+        #{sysAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeKey != null">
+        #{tradeKey,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="canCash != null">
+        #{canCash,jdbcType=INTEGER},
+      </if>
+      <if test="canRecharge != null">
+        #{canRecharge,jdbcType=INTEGER},
+      </if>
+      <if test="sort != null">
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="updateBy != null">
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updareByName != null">
+        #{updareByName,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createByName != null">
+        #{createByName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mainCoin != null">
+        #{mainCoin,jdbcType=INTEGER},
+      </if>
+      <if test="contractAddress != null">
+        #{contractAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="scale != null">
+        #{scale,jdbcType=INTEGER},
+      </if>
+      <if test="sysRechargeBlock != null">
+        #{sysRechargeBlock,jdbcType=INTEGER},
+      </if>
+      <if test="sysCashBlock != null">
+        #{sysCashBlock,jdbcType=INTEGER},
+      </if>
+      <if test="thresholdHotToCold != null">
+        #{thresholdHotToCold,jdbcType=VARCHAR},
+      </if>
+      <if test="transferAccountsThreshold != null">
+        #{transferAccountsThreshold,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null">
+        #{note,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.efun.wallet.entity.Vcoin">
+    update t_mexc_vcoin
+    <set>
+      <if test="vcoinToken != null">
+        vcoin_token = #{vcoinToken,jdbcType=VARCHAR},
+      </if>
+      <if test="vcoinName != null">
+        vcoin_name = #{vcoinName,jdbcType=VARCHAR},
+      </if>
+      <if test="vcoinNameEn != null">
+        vcoin_name_en = #{vcoinNameEn,jdbcType=VARCHAR},
+      </if>
+      <if test="vcoinNameFull != null">
+        vcoin_name_full = #{vcoinNameFull,jdbcType=VARCHAR},
+      </if>
+      <if test="icon != null">
+        icon = #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="sysAccount != null">
+        sys_account = #{sysAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeKey != null">
+        trade_key = #{tradeKey,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="canCash != null">
+        can_cash = #{canCash,jdbcType=INTEGER},
+      </if>
+      <if test="canRecharge != null">
+        can_recharge = #{canRecharge,jdbcType=INTEGER},
+      </if>
+      <if test="sort != null">
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="updateBy != null">
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updareByName != null">
+        updare_by_name = #{updareByName,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null">
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createByName != null">
+        create_by_name = #{createByName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mainCoin != null">
+        main_coin = #{mainCoin,jdbcType=INTEGER},
+      </if>
+      <if test="contractAddress != null">
+        contract_address = #{contractAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="scale != null">
+        scale = #{scale,jdbcType=INTEGER},
+      </if>
+      <if test="sysRechargeBlock != null">
+        sys_recharge_block = #{sysRechargeBlock,jdbcType=INTEGER},
+      </if>
+      <if test="sysCashBlock != null">
+        sys_cash_block = #{sysCashBlock,jdbcType=INTEGER},
+      </if>
+      <if test="thresholdHotToCold != null">
+        threshold_hot_to_cold = #{thresholdHotToCold,jdbcType=VARCHAR},
+      </if>
+      <if test="transferAccountsThreshold != null">
+        transfer_accounts_threshold = #{transferAccountsThreshold,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null">
+        note = #{note,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.efun.wallet.entity.Vcoin">
+    update t_mexc_vcoin
+    set vcoin_token = #{vcoinToken,jdbcType=VARCHAR},
+      vcoin_name = #{vcoinName,jdbcType=VARCHAR},
+      vcoin_name_en = #{vcoinNameEn,jdbcType=VARCHAR},
+      vcoin_name_full = #{vcoinNameFull,jdbcType=VARCHAR},
+      icon = #{icon,jdbcType=VARCHAR},
+      sys_account = #{sysAccount,jdbcType=VARCHAR},
+      trade_key = #{tradeKey,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      can_cash = #{canCash,jdbcType=INTEGER},
+      can_recharge = #{canRecharge,jdbcType=INTEGER},
+      sort = #{sort,jdbcType=INTEGER},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      updare_by_name = #{updareByName,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_by_name = #{createByName,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      main_coin = #{mainCoin,jdbcType=INTEGER},
+      contract_address = #{contractAddress,jdbcType=VARCHAR},
+      scale = #{scale,jdbcType=INTEGER},
+      sys_recharge_block = #{sysRechargeBlock,jdbcType=INTEGER},
+      sys_cash_block = #{sysCashBlock,jdbcType=INTEGER},
+      threshold_hot_to_cold = #{thresholdHotToCold,jdbcType=VARCHAR},
+      transfer_accounts_threshold = #{transferAccountsThreshold,jdbcType=VARCHAR},
+      note = #{note,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.efun.wallet.entity.Vcoin">
+    update t_mexc_vcoin
+    set vcoin_token = #{vcoinToken,jdbcType=VARCHAR},
+      vcoin_name = #{vcoinName,jdbcType=VARCHAR},
+      vcoin_name_en = #{vcoinNameEn,jdbcType=VARCHAR},
+      vcoin_name_full = #{vcoinNameFull,jdbcType=VARCHAR},
+      icon = #{icon,jdbcType=VARCHAR},
+      sys_account = #{sysAccount,jdbcType=VARCHAR},
+      trade_key = #{tradeKey,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      can_cash = #{canCash,jdbcType=INTEGER},
+      can_recharge = #{canRecharge,jdbcType=INTEGER},
+      sort = #{sort,jdbcType=INTEGER},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      updare_by_name = #{updareByName,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_by_name = #{createByName,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      main_coin = #{mainCoin,jdbcType=INTEGER},
+      contract_address = #{contractAddress,jdbcType=VARCHAR},
+      scale = #{scale,jdbcType=INTEGER},
+      sys_recharge_block = #{sysRechargeBlock,jdbcType=INTEGER},
+      sys_cash_block = #{sysCashBlock,jdbcType=INTEGER},
+      threshold_hot_to_cold = #{thresholdHotToCold,jdbcType=VARCHAR},
+      transfer_accounts_threshold = #{transferAccountsThreshold,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByContractAddress" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_mexc_vcoin
+    where contract_address = #{contractAddress,jdbcType=VARCHAR}
+  </select>
+  <select id="queryByEth" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_mexc_vcoin
+    where vcoin_token = "ETH"
+    AND main_coin = 1
+  </select>
+  <select id="selectAll" resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_mexc_vcoin
+  </select>
+</mapper>

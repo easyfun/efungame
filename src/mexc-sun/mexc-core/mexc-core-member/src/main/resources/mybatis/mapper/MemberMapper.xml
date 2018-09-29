@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mexc.sun.core.member.dao.MemberDAO">
+  <resultMap id="BaseResultMap" type="com.mexc.sun.core.member.entity.Member">
+    <id column="member_id" jdbcType="BIGINT" property="memberId" />
+    <result column="member_pwd" jdbcType="VARCHAR" property="memberPwd" />
+    <result column="trade_pwd" jdbcType="VARCHAR" property="tradePwd" />
+    <result column="member_status" jdbcType="TINYINT" property="memberStatus" />
+    <result column="member_level" jdbcType="TINYINT" property="memberLevel" />
+    <result column="auth_level" jdbcType="TINYINT" property="authLevel" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="email_status" jdbcType="TINYINT" property="emailStatus" />
+    <result column="email_active_time" jdbcType="TIMESTAMP" property="emailActiveTime" />
+    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="mobile_status" jdbcType="TINYINT" property="mobileStatus" />
+    <result column="mobile_active_time" jdbcType="TIMESTAMP" property="mobileActiveTime" />
+    <result column="register_time" jdbcType="TIMESTAMP" property="registerTime" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="reserve_11" jdbcType="TINYINT" property="reserve11" />
+    <result column="reserve_12" jdbcType="TINYINT" property="reserve12" />
+    <result column="reserve_13" jdbcType="TINYINT" property="reserve13" />
+    <result column="reserve_21" jdbcType="VARCHAR" property="reserve21" />
+    <result column="reserve_22" jdbcType="VARCHAR" property="reserve22" />
+    <result column="reserve_23" jdbcType="VARCHAR" property="reserve23" />
+    <result column="reserve_31" jdbcType="BIGINT" property="reserve31" />
+    <result column="reserve_32" jdbcType="BIGINT" property="reserve32" />
+    <result column="reserve_33" jdbcType="BIGINT" property="reserve33" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    member_id, member_pwd, trade_pwd, member_status, member_level, auth_level, email, 
+    email_status, email_active_time, mobile, mobile_status, mobile_active_time, register_time, 
+    create_time, update_time, reserve_11, reserve_12, reserve_13, reserve_21, reserve_22, 
+    reserve_23, reserve_31, reserve_32, reserve_33
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_member
+    where member_id = #{memberId,jdbcType=BIGINT}
+  </select>
+  <select id="selectByEmail" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_member
+    where email = #{email,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_member
+    where member_id = #{memberId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.mexc.sun.core.member.entity.Member">
+    insert into t_member (member_id, member_pwd, trade_pwd, 
+      member_status, member_level, auth_level, 
+      email, email_status, email_active_time, 
+      mobile, mobile_status, mobile_active_time, 
+      register_time, create_time, update_time, 
+      reserve_11, reserve_12, reserve_13, 
+      reserve_21, reserve_22, reserve_23, 
+      reserve_31, reserve_32, reserve_33
+      )
+    values (#{memberId,jdbcType=BIGINT}, #{memberPwd,jdbcType=VARCHAR}, #{tradePwd,jdbcType=VARCHAR}, 
+      #{memberStatus,jdbcType=TINYINT}, #{memberLevel,jdbcType=TINYINT}, #{authLevel,jdbcType=TINYINT}, 
+      #{email,jdbcType=VARCHAR}, #{emailStatus,jdbcType=TINYINT}, #{emailActiveTime,jdbcType=TIMESTAMP}, 
+      #{mobile,jdbcType=VARCHAR}, #{mobileStatus,jdbcType=TINYINT}, #{mobileActiveTime,jdbcType=TIMESTAMP}, 
+      #{registerTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{reserve11,jdbcType=TINYINT}, #{reserve12,jdbcType=TINYINT}, #{reserve13,jdbcType=TINYINT}, 
+      #{reserve21,jdbcType=VARCHAR}, #{reserve22,jdbcType=VARCHAR}, #{reserve23,jdbcType=VARCHAR}, 
+      #{reserve31,jdbcType=BIGINT}, #{reserve32,jdbcType=BIGINT}, #{reserve33,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.mexc.sun.core.member.entity.Member">
+    insert into t_member
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="memberId != null">
+        member_id,
+      </if>
+      <if test="memberPwd != null">
+        member_pwd,
+      </if>
+      <if test="tradePwd != null">
+        trade_pwd,
+      </if>
+      <if test="memberStatus != null">
+        member_status,
+      </if>
+      <if test="memberLevel != null">
+        member_level,
+      </if>
+      <if test="authLevel != null">
+        auth_level,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="emailStatus != null">
+        email_status,
+      </if>
+      <if test="emailActiveTime != null">
+        email_active_time,
+      </if>
+      <if test="mobile != null">
+        mobile,
+      </if>
+      <if test="mobileStatus != null">
+        mobile_status,
+      </if>
+      <if test="mobileActiveTime != null">
+        mobile_active_time,
+      </if>
+      <if test="registerTime != null">
+        register_time,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="reserve11 != null">
+        reserve_11,
+      </if>
+      <if test="reserve12 != null">
+        reserve_12,
+      </if>
+      <if test="reserve13 != null">
+        reserve_13,
+      </if>
+      <if test="reserve21 != null">
+        reserve_21,
+      </if>
+      <if test="reserve22 != null">
+        reserve_22,
+      </if>
+      <if test="reserve23 != null">
+        reserve_23,
+      </if>
+      <if test="reserve31 != null">
+        reserve_31,
+      </if>
+      <if test="reserve32 != null">
+        reserve_32,
+      </if>
+      <if test="reserve33 != null">
+        reserve_33,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="memberId != null">
+        #{memberId,jdbcType=BIGINT},
+      </if>
+      <if test="memberPwd != null">
+        #{memberPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="tradePwd != null">
+        #{tradePwd,jdbcType=VARCHAR},
+      </if>
+      <if test="memberStatus != null">
+        #{memberStatus,jdbcType=TINYINT},
+      </if>
+      <if test="memberLevel != null">
+        #{memberLevel,jdbcType=TINYINT},
+      </if>
+      <if test="authLevel != null">
+        #{authLevel,jdbcType=TINYINT},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="emailStatus != null">
+        #{emailStatus,jdbcType=TINYINT},
+      </if>
+      <if test="emailActiveTime != null">
+        #{emailActiveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mobile != null">
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileStatus != null">
+        #{mobileStatus,jdbcType=TINYINT},
+      </if>
+      <if test="mobileActiveTime != null">
+        #{mobileActiveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="registerTime != null">
+        #{registerTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reserve11 != null">
+        #{reserve11,jdbcType=TINYINT},
+      </if>
+      <if test="reserve12 != null">
+        #{reserve12,jdbcType=TINYINT},
+      </if>
+      <if test="reserve13 != null">
+        #{reserve13,jdbcType=TINYINT},
+      </if>
+      <if test="reserve21 != null">
+        #{reserve21,jdbcType=VARCHAR},
+      </if>
+      <if test="reserve22 != null">
+        #{reserve22,jdbcType=VARCHAR},
+      </if>
+      <if test="reserve23 != null">
+        #{reserve23,jdbcType=VARCHAR},
+      </if>
+      <if test="reserve31 != null">
+        #{reserve31,jdbcType=BIGINT},
+      </if>
+      <if test="reserve32 != null">
+        #{reserve32,jdbcType=BIGINT},
+      </if>
+      <if test="reserve33 != null">
+        #{reserve33,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mexc.sun.core.member.entity.Member">
+    update t_member
+    <set>
+      <if test="memberPwd != null">
+        member_pwd = #{memberPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="tradePwd != null">
+        trade_pwd = #{tradePwd,jdbcType=VARCHAR},
+      </if>
+      <if test="memberStatus != null">
+        member_status = #{memberStatus,jdbcType=TINYINT},
+      </if>
+      <if test="memberLevel != null">
+        member_level = #{memberLevel,jdbcType=TINYINT},
+      </if>
+      <if test="authLevel != null">
+        auth_level = #{authLevel,jdbcType=TINYINT},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="emailStatus != null">
+        email_status = #{emailStatus,jdbcType=TINYINT},
+      </if>
+      <if test="emailActiveTime != null">
+        email_active_time = #{emailActiveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mobile != null">
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileStatus != null">
+        mobile_status = #{mobileStatus,jdbcType=TINYINT},
+      </if>
+      <if test="mobileActiveTime != null">
+        mobile_active_time = #{mobileActiveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="registerTime != null">
+        register_time = #{registerTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reserve11 != null">
+        reserve_11 = #{reserve11,jdbcType=TINYINT},
+      </if>
+      <if test="reserve12 != null">
+        reserve_12 = #{reserve12,jdbcType=TINYINT},
+      </if>
+      <if test="reserve13 != null">
+        reserve_13 = #{reserve13,jdbcType=TINYINT},
+      </if>
+      <if test="reserve21 != null">
+        reserve_21 = #{reserve21,jdbcType=VARCHAR},
+      </if>
+      <if test="reserve22 != null">
+        reserve_22 = #{reserve22,jdbcType=VARCHAR},
+      </if>
+      <if test="reserve23 != null">
+        reserve_23 = #{reserve23,jdbcType=VARCHAR},
+      </if>
+      <if test="reserve31 != null">
+        reserve_31 = #{reserve31,jdbcType=BIGINT},
+      </if>
+      <if test="reserve32 != null">
+        reserve_32 = #{reserve32,jdbcType=BIGINT},
+      </if>
+      <if test="reserve33 != null">
+        reserve_33 = #{reserve33,jdbcType=BIGINT},
+      </if>
+    </set>
+    where member_id = #{memberId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mexc.sun.core.member.entity.Member">
+    update t_member
+    set member_pwd = #{memberPwd,jdbcType=VARCHAR},
+      trade_pwd = #{tradePwd,jdbcType=VARCHAR},
+      member_status = #{memberStatus,jdbcType=TINYINT},
+      member_level = #{memberLevel,jdbcType=TINYINT},
+      auth_level = #{authLevel,jdbcType=TINYINT},
+      email = #{email,jdbcType=VARCHAR},
+      email_status = #{emailStatus,jdbcType=TINYINT},
+      email_active_time = #{emailActiveTime,jdbcType=TIMESTAMP},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      mobile_status = #{mobileStatus,jdbcType=TINYINT},
+      mobile_active_time = #{mobileActiveTime,jdbcType=TIMESTAMP},
+      register_time = #{registerTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      reserve_11 = #{reserve11,jdbcType=TINYINT},
+      reserve_12 = #{reserve12,jdbcType=TINYINT},
+      reserve_13 = #{reserve13,jdbcType=TINYINT},
+      reserve_21 = #{reserve21,jdbcType=VARCHAR},
+      reserve_22 = #{reserve22,jdbcType=VARCHAR},
+      reserve_23 = #{reserve23,jdbcType=VARCHAR},
+      reserve_31 = #{reserve31,jdbcType=BIGINT},
+      reserve_32 = #{reserve32,jdbcType=BIGINT},
+      reserve_33 = #{reserve33,jdbcType=BIGINT}
+    where member_id = #{memberId,jdbcType=BIGINT}
+  </update>
+</mapper>

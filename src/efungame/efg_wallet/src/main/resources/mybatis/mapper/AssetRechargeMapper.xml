@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.efun.wallet.dao.AssetRechargeDAO">
+  <resultMap id="BaseResultMap" type="com.efun.wallet.entity.AssetRecharge">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="vcoin_id" jdbcType="VARCHAR" property="vcoinId" />
+    <result column="tx_hash" jdbcType="VARCHAR" property="txHash" />
+    <result column="tx_receipt" jdbcType="VARCHAR" property="txReceipt" />
+    <result column="sync_time" jdbcType="TIMESTAMP" property="syncTime" />
+    <result column="member_id" jdbcType="VARCHAR" property="memberId" />
+    <result column="asset_address" jdbcType="VARCHAR" property="assetAddress" />
+    <result column="recharge_address" jdbcType="VARCHAR" property="rechargeAddress" />
+    <result column="recharge_value" jdbcType="DECIMAL" property="rechargeValue" />
+    <result column="receipt_time" jdbcType="TIMESTAMP" property="receiptTime" />
+    <result column="asset_id" jdbcType="VARCHAR" property="assetId" />
+    <result column="tx_token" jdbcType="VARCHAR" property="txToken" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, vcoin_id, tx_hash, tx_receipt, sync_time, member_id, asset_address, recharge_address, 
+    recharge_value, receipt_time, asset_id, tx_token
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_mexc_asset_recharge
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from t_mexc_asset_recharge
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.efun.wallet.entity.AssetRecharge">
+    insert into t_mexc_asset_recharge (id, vcoin_id, tx_hash, 
+      tx_receipt, sync_time, member_id, 
+      asset_address, recharge_address, recharge_value, 
+      receipt_time, asset_id, tx_token
+      )
+    values (#{id,jdbcType=VARCHAR}, #{vcoinId,jdbcType=VARCHAR}, #{txHash,jdbcType=VARCHAR}, 
+      #{txReceipt,jdbcType=VARCHAR}, #{syncTime,jdbcType=TIMESTAMP}, #{memberId,jdbcType=VARCHAR}, 
+      #{assetAddress,jdbcType=VARCHAR}, #{rechargeAddress,jdbcType=VARCHAR}, #{rechargeValue,jdbcType=DECIMAL}, 
+      #{receiptTime,jdbcType=TIMESTAMP}, #{assetId,jdbcType=VARCHAR}, #{txToken,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.efun.wallet.entity.AssetRecharge">
+    insert into t_mexc_asset_recharge
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="vcoinId != null">
+        vcoin_id,
+      </if>
+      <if test="txHash != null">
+        tx_hash,
+      </if>
+      <if test="txReceipt != null">
+        tx_receipt,
+      </if>
+      <if test="syncTime != null">
+        sync_time,
+      </if>
+      <if test="memberId != null">
+        member_id,
+      </if>
+      <if test="assetAddress != null">
+        asset_address,
+      </if>
+      <if test="rechargeAddress != null">
+        recharge_address,
+      </if>
+      <if test="rechargeValue != null">
+        recharge_value,
+      </if>
+      <if test="receiptTime != null">
+        receipt_time,
+      </if>
+      <if test="assetId != null">
+        asset_id,
+      </if>
+      <if test="txToken != null">
+        tx_token,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="vcoinId != null">
+        #{vcoinId,jdbcType=VARCHAR},
+      </if>
+      <if test="txHash != null">
+        #{txHash,jdbcType=VARCHAR},
+      </if>
+      <if test="txReceipt != null">
+        #{txReceipt,jdbcType=VARCHAR},
+      </if>
+      <if test="syncTime != null">
+        #{syncTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="memberId != null">
+        #{memberId,jdbcType=VARCHAR},
+      </if>
+      <if test="assetAddress != null">
+        #{assetAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="rechargeAddress != null">
+        #{rechargeAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="rechargeValue != null">
+        #{rechargeValue,jdbcType=DECIMAL},
+      </if>
+      <if test="receiptTime != null">
+        #{receiptTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="assetId != null">
+        #{assetId,jdbcType=VARCHAR},
+      </if>
+      <if test="txToken != null">
+        #{txToken,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.efun.wallet.entity.AssetRecharge">
+    update t_mexc_asset_recharge
+    <set>
+      <if test="vcoinId != null">
+        vcoin_id = #{vcoinId,jdbcType=VARCHAR},
+      </if>
+      <if test="txHash != null">
+        tx_hash = #{txHash,jdbcType=VARCHAR},
+      </if>
+      <if test="txReceipt != null">
+        tx_receipt = #{txReceipt,jdbcType=VARCHAR},
+      </if>
+      <if test="syncTime != null">
+        sync_time = #{syncTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="memberId != null">
+        member_id = #{memberId,jdbcType=VARCHAR},
+      </if>
+      <if test="assetAddress != null">
+        asset_address = #{assetAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="rechargeAddress != null">
+        recharge_address = #{rechargeAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="rechargeValue != null">
+        recharge_value = #{rechargeValue,jdbcType=DECIMAL},
+      </if>
+      <if test="receiptTime != null">
+        receipt_time = #{receiptTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="assetId != null">
+        asset_id = #{assetId,jdbcType=VARCHAR},
+      </if>
+      <if test="txToken != null">
+        tx_token = #{txToken,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.efun.wallet.entity.AssetRecharge">
+    update t_mexc_asset_recharge
+    set vcoin_id = #{vcoinId,jdbcType=VARCHAR},
+      tx_hash = #{txHash,jdbcType=VARCHAR},
+      tx_receipt = #{txReceipt,jdbcType=VARCHAR},
+      sync_time = #{syncTime,jdbcType=TIMESTAMP},
+      member_id = #{memberId,jdbcType=VARCHAR},
+      asset_address = #{assetAddress,jdbcType=VARCHAR},
+      recharge_address = #{rechargeAddress,jdbcType=VARCHAR},
+      recharge_value = #{rechargeValue,jdbcType=DECIMAL},
+      receipt_time = #{receiptTime,jdbcType=TIMESTAMP},
+      asset_id = #{assetId,jdbcType=VARCHAR},
+      tx_token = #{txToken,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

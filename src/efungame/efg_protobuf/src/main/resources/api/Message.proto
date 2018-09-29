@@ -1,0 +1,10 @@
+syntax = "proto2";
+package protobuf.api;
+option java_package = "com.efun.game.protobuf.api";
+option java_outer_classname = "MessageProto";
+import "Header.proto";
+
+message Message {
+    required Header header = 1;     // 消息头
+    optional bytes  body = 2;       // 消息体
+}

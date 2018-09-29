@@ -1,0 +1,11 @@
+syntax = "proto2";
+package protobuf.app.message;
+option java_package = "com.efun.game.protobuf.app.message";
+option java_outer_classname = "UpdateUserSignInStatusReqProto";
+import "Enums.proto";
+
+message UpdateUserSignInStatusReq {
+	required fixed64 uid = 1; // uid
+	required AppType appType = 2; //
+    required UserSignInStatus signInStatus = 3; // 登录状态
+}

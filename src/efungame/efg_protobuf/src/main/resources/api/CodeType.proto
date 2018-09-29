@@ -1,0 +1,10 @@
+syntax = "proto2";
+package protobuf.api;
+option java_package = "com.efun.game.protobuf.api";
+option java_outer_classname = "CodeTypeProto";
+
+// 消息编码类型
+enum CodeType {
+    PROTOBUF    = 0;   // protobuf
+    JSON        = 1;   // json
+}

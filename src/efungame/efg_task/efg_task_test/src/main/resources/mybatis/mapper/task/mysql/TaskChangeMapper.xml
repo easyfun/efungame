@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.efun.game.task.dao.mysql.TaskChangeDAO">
+  <resultMap id="BaseResultMap" type="com.efun.game.task.entity.po.mysql.TaskChangePO">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="task_id" jdbcType="BIGINT" property="taskId" />
+    <result column="task_key" jdbcType="VARCHAR" property="taskKey" />
+    <result column="handler" jdbcType="VARCHAR" property="handler" />
+    <result column="change_type" jdbcType="TINYINT" property="changeType" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="error_code" jdbcType="VARCHAR" property="errorCode" />
+    <result column="error_desc" jdbcType="VARCHAR" property="errorDesc" />
+    <result column="apply_time" jdbcType="TIMESTAMP" property="applyTime" />
+    <result column="finish_time" jdbcType="TIMESTAMP" property="finishTime" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, task_id, task_key, handler, change_type, status, error_code, error_desc, apply_time, 
+    finish_time, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_task_change
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_task_change
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.efun.game.task.entity.po.mysql.TaskChangePO">
+    insert into t_task_change (id, task_id, task_key, 
+      handler, change_type, status, 
+      error_code, error_desc, apply_time, 
+      finish_time, create_time, update_time
+      )
+    values (#{id,jdbcType=BIGINT}, #{taskId,jdbcType=BIGINT}, #{taskKey,jdbcType=VARCHAR}, 
+      #{handler,jdbcType=VARCHAR}, #{changeType,jdbcType=TINYINT}, #{status,jdbcType=VARCHAR}, 
+      #{errorCode,jdbcType=VARCHAR}, #{errorDesc,jdbcType=VARCHAR}, #{applyTime,jdbcType=TIMESTAMP}, 
+      #{finishTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.efun.game.task.entity.po.mysql.TaskChangePO">
+    insert into t_task_change
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="taskId != null">
+        task_id,
+      </if>
+      <if test="taskKey != null">
+        task_key,
+      </if>
+      <if test="handler != null">
+        handler,
+      </if>
+      <if test="changeType != null">
+        change_type,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="errorCode != null">
+        error_code,
+      </if>
+      <if test="errorDesc != null">
+        error_desc,
+      </if>
+      <if test="applyTime != null">
+        apply_time,
+      </if>
+      <if test="finishTime != null">
+        finish_time,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="taskId != null">
+        #{taskId,jdbcType=BIGINT},
+      </if>
+      <if test="taskKey != null">
+        #{taskKey,jdbcType=VARCHAR},
+      </if>
+      <if test="handler != null">
+        #{handler,jdbcType=VARCHAR},
+      </if>
+      <if test="changeType != null">
+        #{changeType,jdbcType=TINYINT},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="errorCode != null">
+        #{errorCode,jdbcType=VARCHAR},
+      </if>
+      <if test="errorDesc != null">
+        #{errorDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="applyTime != null">
+        #{applyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="finishTime != null">
+        #{finishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.efun.game.task.entity.po.mysql.TaskChangePO">
+    update t_task_change
+    <set>
+      <if test="taskId != null">
+        task_id = #{taskId,jdbcType=BIGINT},
+      </if>
+      <if test="taskKey != null">
+        task_key = #{taskKey,jdbcType=VARCHAR},
+      </if>
+      <if test="handler != null">
+        handler = #{handler,jdbcType=VARCHAR},
+      </if>
+      <if test="changeType != null">
+        change_type = #{changeType,jdbcType=TINYINT},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="errorCode != null">
+        error_code = #{errorCode,jdbcType=VARCHAR},
+      </if>
+      <if test="errorDesc != null">
+        error_desc = #{errorDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="applyTime != null">
+        apply_time = #{applyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="finishTime != null">
+        finish_time = #{finishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.efun.game.task.entity.po.mysql.TaskChangePO">
+    update t_task_change
+    set task_id = #{taskId,jdbcType=BIGINT},
+      task_key = #{taskKey,jdbcType=VARCHAR},
+      handler = #{handler,jdbcType=VARCHAR},
+      change_type = #{changeType,jdbcType=TINYINT},
+      status = #{status,jdbcType=VARCHAR},
+      error_code = #{errorCode,jdbcType=VARCHAR},
+      error_desc = #{errorDesc,jdbcType=VARCHAR},
+      apply_time = #{applyTime,jdbcType=TIMESTAMP},
+      finish_time = #{finishTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

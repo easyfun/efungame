@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.efun.wallet.dao.AssetTransDAO">
+  <resultMap id="BaseResultMap" type="com.efun.wallet.entity.AssetTrans">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="asset_id" jdbcType="VARCHAR" property="assetId" />
+    <result column="vcoin_id" jdbcType="VARCHAR" property="vcoinId" />
+    <result column="trans_amount" jdbcType="DECIMAL" property="transAmount" />
+    <result column="total_amount" jdbcType="DECIMAL" property="totalAmount" />
+    <result column="balance_amount" jdbcType="DECIMAL" property="balanceAmount" />
+    <result column="frozen_amount" jdbcType="DECIMAL" property="frozenAmount" />
+    <result column="btc_amount" jdbcType="DECIMAL" property="btcAmount" />
+    <result column="trans_time" jdbcType="TIMESTAMP" property="transTime" />
+    <result column="trans_receipt" jdbcType="VARCHAR" property="transReceipt" />
+    <result column="trans_type" jdbcType="INTEGER" property="transType" />
+    <result column="trans_no" jdbcType="VARCHAR" property="transNo" />
+    <result column="trade_type" jdbcType="VARCHAR" property="tradeType" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, asset_id, vcoin_id, trans_amount, total_amount, balance_amount, frozen_amount, 
+    btc_amount, trans_time, trans_receipt, trans_type, trans_no, trade_type
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_mexc_asset_trans
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="countByTransNo" parameterType="java.lang.String" resultType="java.lang.Integer">
+    select
+      count(0)
+    from t_mexc_asset_trans
+    where trans_no = #{transNo,jdbcType=VARCHAR}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from t_mexc_asset_trans
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.efun.wallet.entity.AssetTrans">
+    insert into t_mexc_asset_trans (id, asset_id, vcoin_id, 
+      trans_amount, total_amount, balance_amount, 
+      frozen_amount, btc_amount, trans_time, 
+      trans_receipt, trans_type, trans_no, 
+      trade_type)
+    values (#{id,jdbcType=VARCHAR}, #{assetId,jdbcType=VARCHAR}, #{vcoinId,jdbcType=VARCHAR}, 
+      #{transAmount,jdbcType=DECIMAL}, #{totalAmount,jdbcType=DECIMAL}, #{balanceAmount,jdbcType=DECIMAL}, 
+      #{frozenAmount,jdbcType=DECIMAL}, #{btcAmount,jdbcType=DECIMAL}, #{transTime,jdbcType=TIMESTAMP}, 
+      #{transReceipt,jdbcType=VARCHAR}, #{transType,jdbcType=INTEGER}, #{transNo,jdbcType=VARCHAR}, 
+      #{tradeType,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.efun.wallet.entity.AssetTrans">
+    insert into t_mexc_asset_trans
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="assetId != null">
+        asset_id,
+      </if>
+      <if test="vcoinId != null">
+        vcoin_id,
+      </if>
+      <if test="transAmount != null">
+        trans_amount,
+      </if>
+      <if test="totalAmount != null">
+        total_amount,
+      </if>
+      <if test="balanceAmount != null">
+        balance_amount,
+      </if>
+      <if test="frozenAmount != null">
+        frozen_amount,
+      </if>
+      <if test="btcAmount != null">
+        btc_amount,
+      </if>
+      <if test="transTime != null">
+        trans_time,
+      </if>
+      <if test="transReceipt != null">
+        trans_receipt,
+      </if>
+      <if test="transType != null">
+        trans_type,
+      </if>
+      <if test="transNo != null">
+        trans_no,
+      </if>
+      <if test="tradeType != null">
+        trade_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="assetId != null">
+        #{assetId,jdbcType=VARCHAR},
+      </if>
+      <if test="vcoinId != null">
+        #{vcoinId,jdbcType=VARCHAR},
+      </if>
+      <if test="transAmount != null">
+        #{transAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="totalAmount != null">
+        #{totalAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="balanceAmount != null">
+        #{balanceAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="frozenAmount != null">
+        #{frozenAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="btcAmount != null">
+        #{btcAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="transTime != null">
+        #{transTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="transReceipt != null">
+        #{transReceipt,jdbcType=VARCHAR},
+      </if>
+      <if test="transType != null">
+        #{transType,jdbcType=INTEGER},
+      </if>
+      <if test="transNo != null">
+        #{transNo,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeType != null">
+        #{tradeType,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.efun.wallet.entity.AssetTrans">
+    update t_mexc_asset_trans
+    <set>
+      <if test="assetId != null">
+        asset_id = #{assetId,jdbcType=VARCHAR},
+      </if>
+      <if test="vcoinId != null">
+        vcoin_id = #{vcoinId,jdbcType=VARCHAR},
+      </if>
+      <if test="transAmount != null">
+        trans_amount = #{transAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="totalAmount != null">
+        total_amount = #{totalAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="balanceAmount != null">
+        balance_amount = #{balanceAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="frozenAmount != null">
+        frozen_amount = #{frozenAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="btcAmount != null">
+        btc_amount = #{btcAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="transTime != null">
+        trans_time = #{transTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="transReceipt != null">
+        trans_receipt = #{transReceipt,jdbcType=VARCHAR},
+      </if>
+      <if test="transType != null">
+        trans_type = #{transType,jdbcType=INTEGER},
+      </if>
+      <if test="transNo != null">
+        trans_no = #{transNo,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeType != null">
+        trade_type = #{tradeType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.efun.wallet.entity.AssetTrans">
+    update t_mexc_asset_trans
+    set asset_id = #{assetId,jdbcType=VARCHAR},
+      vcoin_id = #{vcoinId,jdbcType=VARCHAR},
+      trans_amount = #{transAmount,jdbcType=DECIMAL},
+      total_amount = #{totalAmount,jdbcType=DECIMAL},
+      balance_amount = #{balanceAmount,jdbcType=DECIMAL},
+      frozen_amount = #{frozenAmount,jdbcType=DECIMAL},
+      btc_amount = #{btcAmount,jdbcType=DECIMAL},
+      trans_time = #{transTime,jdbcType=TIMESTAMP},
+      trans_receipt = #{transReceipt,jdbcType=VARCHAR},
+      trans_type = #{transType,jdbcType=INTEGER},
+      trans_no = #{transNo,jdbcType=VARCHAR},
+      trade_type = #{tradeType,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

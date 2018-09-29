@@ -1,0 +1,9 @@
+syntax = "proto2";
+package protobuf.api;
+option java_package = "com.efun.game.protobuf.api";
+option java_outer_classname = "EncryptionTypeProto";
+
+// 消息加解密类型
+enum EncryptionType {
+    NONE = 0;   // 0-不加密
+}

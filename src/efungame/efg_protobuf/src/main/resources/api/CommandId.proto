@@ -1,0 +1,31 @@
+syntax = "proto2";
+package protobuf.api;
+option java_package = "com.efun.game.protobuf.api";
+option java_outer_classname = "CommandIdProto";
+
+// 握手请求消息，握手应答消息
+// 心跳请求消息，心跳应答消息
+// 业务请求消息，业务应答消息
+// 业务ONE WAY消息
+// 消息编码类型
+enum CommandId {
+    HANDSHAKE_REQUEST = 0; // 握手请求消息
+    HANDSHAKE_RESPONSE = 1; // 握手响应消息
+
+    HEART_BEAT_REQUEST = 2; // 心跳请求消息
+    HEART_BEAT_RESPONSE = 3; // 心跳响应消息
+    
+    SERVER_AUTH_REQUEST = 5000; // 用户认证请求消息
+    SERVER_AUTH_RESPONSE = 5001; // 用户认证响应消息
+
+    USER_SIGN_UP_REQUEST = 10000; // 用户注册请求消息
+    USER_SIGN_UP_RESPONSE = 10001; // 用户注册应答消息
+    
+    USER_SIGN_IN_REQUEST = 10002; // 用户登录请求消息
+    USER_SIGN_IN_RESPONSE = 10003; // 用户登录应答消息
+    
+    MESSAGE_UPDATE_USER_SIGN_IN_STATUS_REQUEST = 20000; // 更改用户登录状态请求消息
+    MESSAGE_UPDATE_USER_SIGN_IN_STATUS_RESPONSE = 20001; // 更改用户登录状态应答消息
+    
+    
+}

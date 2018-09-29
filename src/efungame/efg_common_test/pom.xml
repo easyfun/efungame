@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.efun.game</groupId>
+		<artifactId>efungame</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<artifactId>efg_common_test</artifactId>
+	<version>1.0.1-SNAPSHOT</version>
+	<name>efg_common_test</name>
+	<!-- <url>http://maven.apache.org</url> -->
+	<packaging>jar</packaging>
+	<properties>
+		<version.spring>4.2.5.RELEASE</version.spring>
+		<version.junit>4.11</version.junit>
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${version.spring}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${version.spring}</version>
+			<!-- <scope>test</scope> -->
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+			<version>${version.spring}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aspects</artifactId>
+			<version>${version.spring}</version>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${version.junit}</version>
+			<!-- <scope>test</scope> -->
+		</dependency>
+	</dependencies>
+	<build>
+		<plugins>
+
+			<!-- 测试插件mvn test -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.19</version>
+				<configuration>
+				</configuration>
+			</plugin>
+
+			<!-- 源码打包插件 -->
+
+			<!-- 工程打jar包 -->
+
+			<!-- 生产部署包打包插件 -->
+
+		</plugins>
+	</build>
+	<!-- 部署到maven仓库 -->
+</project>

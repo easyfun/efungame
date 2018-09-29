@@ -1,0 +1,13 @@
+syntax = "proto2";
+package protobuf.app.user;
+option java_package = "com.efun.game.protobuf.app.user";
+option java_outer_classname = "UserSignInReqProto";
+import "Enums.proto";
+
+message UserSignInReq {
+    required UserType userType = 1; // 用户类型: 1-用户名; 2-手机号; 3-身份证; 4-邮箱
+    required string userName = 2; // 用户名
+    required string password = 3; // 密码
+    required AppType appType = 4; // app类型: 0-未知; 1-Web; 2-IOS; 3-Andriod
+    required string loginIp = 5; // 登录ip
+}

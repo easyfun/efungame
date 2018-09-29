@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.efun.wallet.dao.MemberAssetDAO">
+  <resultMap id="BaseResultMap" type="com.efun.wallet.entity.MemberAsset">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="member_id" jdbcType="VARCHAR" property="memberId" />
+    <result column="account" jdbcType="VARCHAR" property="account" />
+    <result column="vcoin_id" jdbcType="VARCHAR" property="vcoinId" />
+    <result column="total_amount" jdbcType="DECIMAL" property="totalAmount" />
+    <result column="balance_amount" jdbcType="DECIMAL" property="balanceAmount" />
+    <result column="frozen_amount" jdbcType="DECIMAL" property="frozenAmount" />
+    <result column="btc_amount" jdbcType="DECIMAL" property="btcAmount" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="wallet_address" jdbcType="VARCHAR" property="walletAddress" />
+    <result column="note" jdbcType="VARCHAR" property="note" />
+    <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
+    <result column="updare_by_name" jdbcType="VARCHAR" property="updareByName" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="create_by_name" jdbcType="VARCHAR" property="createByName" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="account_phrase" jdbcType="VARCHAR" property="accountPhrase" />
+    <result column="account_pwd" jdbcType="VARCHAR" property="accountPwd" />
+    <result column="iv" jdbcType="VARCHAR" property="iv" />
+    <result column="wallet_id" jdbcType="VARCHAR" property="walletId" />
+    <result column="file_path" jdbcType="VARCHAR" property="filePath" />
+    <result column="token" jdbcType="VARCHAR" property="token" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, member_id, account, vcoin_id, total_amount, balance_amount, frozen_amount, btc_amount, 
+    status, wallet_address, note, update_by, updare_by_name, update_time, create_by, 
+    create_by_name, create_time, account_phrase, account_pwd, iv, wallet_id, file_path, 
+    token
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_mexc_member_asset
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByAddressAndToken" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_mexc_member_asset
+    where wallet_address = #{address,jdbcType=VARCHAR}
+    and token = #{token, jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from t_mexc_member_asset
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.efun.wallet.entity.MemberAsset">
+    insert into t_mexc_member_asset (id, member_id, account, 
+      vcoin_id, total_amount, balance_amount, 
+      frozen_amount, btc_amount, status, 
+      wallet_address, note, update_by, 
+      updare_by_name, update_time, create_by, 
+      create_by_name, create_time, account_phrase, 
+      account_pwd, iv, wallet_id, 
+      file_path, token)
+    values (#{id,jdbcType=VARCHAR}, #{memberId,jdbcType=VARCHAR}, #{account,jdbcType=VARCHAR}, 
+      #{vcoinId,jdbcType=VARCHAR}, #{totalAmount,jdbcType=DECIMAL}, #{balanceAmount,jdbcType=DECIMAL}, 
+      #{frozenAmount,jdbcType=DECIMAL}, #{btcAmount,jdbcType=DECIMAL}, #{status,jdbcType=INTEGER}, 
+      #{walletAddress,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR}, #{updateBy,jdbcType=VARCHAR}, 
+      #{updareByName,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR}, 
+      #{createByName,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{accountPhrase,jdbcType=VARCHAR}, 
+      #{accountPwd,jdbcType=VARCHAR}, #{iv,jdbcType=VARCHAR}, #{walletId,jdbcType=VARCHAR}, 
+      #{filePath,jdbcType=VARCHAR}, #{token,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.efun.wallet.entity.MemberAsset">
+    insert into t_mexc_member_asset
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="memberId != null">
+        member_id,
+      </if>
+      <if test="account != null">
+        account,
+      </if>
+      <if test="vcoinId != null">
+        vcoin_id,
+      </if>
+      <if test="totalAmount != null">
+        total_amount,
+      </if>
+      <if test="balanceAmount != null">
+        balance_amount,
+      </if>
+      <if test="frozenAmount != null">
+        frozen_amount,
+      </if>
+      <if test="btcAmount != null">
+        btc_amount,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="walletAddress != null">
+        wallet_address,
+      </if>
+      <if test="note != null">
+        note,
+      </if>
+      <if test="updateBy != null">
+        update_by,
+      </if>
+      <if test="updareByName != null">
+        updare_by_name,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+      <if test="createByName != null">
+        create_by_name,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="accountPhrase != null">
+        account_phrase,
+      </if>
+      <if test="accountPwd != null">
+        account_pwd,
+      </if>
+      <if test="iv != null">
+        iv,
+      </if>
+      <if test="walletId != null">
+        wallet_id,
+      </if>
+      <if test="filePath != null">
+        file_path,
+      </if>
+      <if test="token != null">
+        token,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="memberId != null">
+        #{memberId,jdbcType=VARCHAR},
+      </if>
+      <if test="account != null">
+        #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="vcoinId != null">
+        #{vcoinId,jdbcType=VARCHAR},
+      </if>
+      <if test="totalAmount != null">
+        #{totalAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="balanceAmount != null">
+        #{balanceAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="frozenAmount != null">
+        #{frozenAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="btcAmount != null">
+        #{btcAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="walletAddress != null">
+        #{walletAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null">
+        #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="updateBy != null">
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updareByName != null">
+        #{updareByName,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createByName != null">
+        #{createByName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="accountPhrase != null">
+        #{accountPhrase,jdbcType=VARCHAR},
+      </if>
+      <if test="accountPwd != null">
+        #{accountPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="iv != null">
+        #{iv,jdbcType=VARCHAR},
+      </if>
+      <if test="walletId != null">
+        #{walletId,jdbcType=VARCHAR},
+      </if>
+      <if test="filePath != null">
+        #{filePath,jdbcType=VARCHAR},
+      </if>
+      <if test="token != null">
+        #{token,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.efun.wallet.entity.MemberAsset">
+    update t_mexc_member_asset
+    <set>
+      <if test="memberId != null">
+        member_id = #{memberId,jdbcType=VARCHAR},
+      </if>
+      <if test="account != null">
+        account = #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="vcoinId != null">
+        vcoin_id = #{vcoinId,jdbcType=VARCHAR},
+      </if>
+      <if test="totalAmount != null">
+        total_amount = #{totalAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="balanceAmount != null">
+        balance_amount = #{balanceAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="frozenAmount != null">
+        frozen_amount = #{frozenAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="btcAmount != null">
+        btc_amount = #{btcAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="walletAddress != null">
+        wallet_address = #{walletAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null">
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="updateBy != null">
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updareByName != null">
+        updare_by_name = #{updareByName,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null">
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createByName != null">
+        create_by_name = #{createByName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="accountPhrase != null">
+        account_phrase = #{accountPhrase,jdbcType=VARCHAR},
+      </if>
+      <if test="accountPwd != null">
+        account_pwd = #{accountPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="iv != null">
+        iv = #{iv,jdbcType=VARCHAR},
+      </if>
+      <if test="walletId != null">
+        wallet_id = #{walletId,jdbcType=VARCHAR},
+      </if>
+      <if test="filePath != null">
+        file_path = #{filePath,jdbcType=VARCHAR},
+      </if>
+      <if test="token != null">
+        token = #{token,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.efun.wallet.entity.MemberAsset">
+    update t_mexc_member_asset
+    set member_id = #{memberId,jdbcType=VARCHAR},
+      account = #{account,jdbcType=VARCHAR},
+      vcoin_id = #{vcoinId,jdbcType=VARCHAR},
+      total_amount = #{totalAmount,jdbcType=DECIMAL},
+      balance_amount = #{balanceAmount,jdbcType=DECIMAL},
+      frozen_amount = #{frozenAmount,jdbcType=DECIMAL},
+      btc_amount = #{btcAmount,jdbcType=DECIMAL},
+      status = #{status,jdbcType=INTEGER},
+      wallet_address = #{walletAddress,jdbcType=VARCHAR},
+      note = #{note,jdbcType=VARCHAR},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      updare_by_name = #{updareByName,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_by_name = #{createByName,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      account_phrase = #{accountPhrase,jdbcType=VARCHAR},
+      account_pwd = #{accountPwd,jdbcType=VARCHAR},
+      iv = #{iv,jdbcType=VARCHAR},
+      wallet_id = #{walletId,jdbcType=VARCHAR},
+      file_path = #{filePath,jdbcType=VARCHAR},
+      token = #{token,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="rechargeUpdate">
+    update t_mexc_member_asset
+    set total_amount=total_amount+#{inComeValue},balance_amount=balance_amount+#{inComeValue}
+    WHERE id=#{assetId}
+  </update>
+  <select id="queryAsset" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_mexc_member_asset
+    where vcoin_id = #{vcionId,jdbcType=VARCHAR}
+    AND  wallet_address = #{assetAdress,jdbcType=VARCHAR}
+  </select>
+</mapper>

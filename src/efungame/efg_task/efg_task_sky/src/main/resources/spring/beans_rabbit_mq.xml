@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/rabbit http://www.springframework.org/schema/rabbit/spring-rabbit.xsd">
+
+	<!-- Spring-AMQP: https://docs.spring.io/spring-amqp/reference/htmlsingle/#amqp-->
+<!--
+	<bean id="connectionFactory"
+		  class="org.springframework.amqp.rabbit.connection.CachingConnectionFactory">
+		<constructor-arg value="${rabbit.mq.host}"/>
+		<property name="port" value="${rabbit.mq.port}" />
+		<property name="username" value="${rabbit.mq.username}"/>
+		<property name="password" value="${rabbit.mq.password}"/>
+		<property name="channelCacheSize" value="25"/>
+	</bean>
+-->
+
+	<rabbit:connection-factory id="connectionFactory" host="${rabbit.mq.host}" port="${rabbit.mq.port}"	username="${rabbit.mq.username}" password="${rabbit.mq.password}" channel-cache-size="50" />
+	<rabbit:admin connection-factory="connectionFactory"/>
+	<rabbit:queue id="task" name="${queue.name.task}" durable="true"/>
+	<rabbit:queue id="retryTask" name="${queue.name.retry.task}" durable="true" >
+		<rabbit:queue-arguments>
+			<entry key="x-dead-letter-exchange" value="${exchange.name.task}"/>
+			<entry key="x-dead-letter-routing-key" value="${queue.name.task}"/>
+		</rabbit:queue-arguments>
+	</rabbit:queue>
+	<rabbit:direct-exchange id="taskExchange" name="${exchange.name.task}" durable="true" auto-delete="false">
+		<rabbit:bindings>
+			<rabbit:binding queue="task" key="${queue.name.task}"/>
+			<rabbit:binding queue="retryTask" key="${queue.name.retry.task}"/>
+		</rabbit:bindings>
+	</rabbit:direct-exchange>
+	<rabbit:template id="taskAmqpTemplate" exchange="${exchange.name.task}" connection-factory="connectionFactory" />
+</beans>
+
